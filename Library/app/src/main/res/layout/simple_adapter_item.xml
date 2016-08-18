@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+   <LinearLayout
+       android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:orientation="horizontal"
+       >
+<ImageView
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:id="@+id/ImageView1"
+    android:padding="5dp"
+    />
+ <TextView
+     android:layout_height="wrap_content"
+     android:layout_width="match_parent"
+     android:id="@+id/TextView12"
+     android:textSize="20dp"
+     />
+       </LinearLayout>
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/TextView13"
+        android:textSize="20dp"
+        android:text="非常好的一本java书"
+        />
+</LinearLayout>
