@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">FirstApp</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="TextView1">万歩計</string>
+    <string name="TextView2">步数:</string>
+    <string name="TextView3">N/A</string>
+    <string name="TextView4">距離</string>
+    <string name="TextView5">N/A</string>
+    <string name="TextView6">"体重入力"</string>
+    <string name="TextView7">カロリー</string>
+    <string name="TextView8">N/A</string>
+    <string name="TextView9">0分0秒</string>
+    <string name="TextView10">平均速度</string>
+    <string name="TextView11">0</string>
+    <string name="Button1">開始</string>
+    <string name="Button2">遷移</string>
+    <string name="Button3">計算</string>
+    <string name="Button4">定時</string>
+    <string name="Button5">中止</string>
+    <string name="Button6">Reset</string>
+    <string name="title_activity_jiayuan">jiayuan</string>
+
+</resources>
