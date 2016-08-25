@@ -18,7 +18,7 @@
 
     <RadioGroup
         android:id="@+id/Radiogroup"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="bottom"
@@ -29,10 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_weight="1"
-
         android:button="@null"
         android:checked="true"
-
         android:gravity="center_horizontal|bottom"
         android:paddingTop="2dp"
         android:text="查找书籍"
@@ -56,15 +54,25 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_weight="1"
-
         android:button="@null"
-
         android:gravity="center_horizontal|bottom"
         android:paddingTop="2dp"
         android:text="借阅情况"
-         />
+        />
+        <RadioButton
+            android:id="@+id/RadioButton4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center_horizontal|bottom"
+            android:paddingTop="2dp"
+            android:text="其他"
+            />
 
 </RadioGroup>
+
 <LinearLayout
     android:layout_height="match_parent"
     android:layout_width="match_parent"

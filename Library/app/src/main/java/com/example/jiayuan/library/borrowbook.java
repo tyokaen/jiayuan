@@ -55,8 +55,8 @@ public class borrowbook extends Activity {
         builder.setMessage("您所借阅的书是:"+name[position]);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int which) {
-              SharedPreferences.Editor editor1=sp1.edit();
-          list1.add("jia"+i);
+         SharedPreferences.Editor editor1=sp1.edit();
+         list1.add("jia"+i);
             String str=list1.get(i);
               editor1.putString(str,name[position]);
               i++;

@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 EditText ed,ed1;
     int i=0;
  Button b,b1,b2,b5;
-  static  String str,str1,str2,str3;
+  static String str,str1,str2,str3;
     TextView t;
  LibraryDbOpenHelper libraryDbOpenHelper;
  public SharedPreferences sp;
@@ -87,18 +87,17 @@ EditText ed,ed1;
         bofang();
     }
     public void bofang(){
-   handler.postDelayed(runnable,1000);
+        handler.postDelayed(runnable,1000);
     }
     public Runnable runnable = new Runnable(){
         public void run(){
             handler.postDelayed(this,1000);
-         imageView.setImageResource(bookshow.image[i]);
+            imageView.setImageResource(bookshow.image[i]);
             i++;
             if(i==9){
                 i=0;
             }
         }
-
     };
     public void changepassword(Context context){
         final EditText editText=new EditText(this);
