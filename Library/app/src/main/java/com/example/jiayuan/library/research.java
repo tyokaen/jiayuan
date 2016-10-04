@@ -29,7 +29,7 @@ SharedPreferences sp1;
       //  tv2.setText(MainActivity.str3);
         list1=new ArrayList<String>();
        sp1=this.getSharedPreferences("demo-02",MODE_PRIVATE);
-        for(int j=0;j<borrowbook.list1.size();j++){
+        for(int j = 0; j< borrowbook.list1.size(); j++){
               list1.add(sp1.getString(borrowbook.list1.get(j),"meizhaodao"));
         }
         adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list1);

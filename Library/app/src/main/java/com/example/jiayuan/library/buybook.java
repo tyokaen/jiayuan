@@ -24,7 +24,7 @@ TextView tx;
         button1 = (Button) findViewById(R.id.Button11);
         button2=(Button)findViewById(R.id.Button12);
         tx=(TextView)findViewById(R.id.TextView15);
-        imageView.setImageResource(bookshow.image[bookshow.i]);
+        imageView.setImageResource(showFragment.image[showFragment.i]);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +47,7 @@ TextView tx;
             public void onClick(View v) {
                 AlertDialog.Builder builder=new AlertDialog.Builder(buybook.this);
                 builder.setTitle("确认信息");
-                builder.setMessage("您需要支付:"+i*bookshow.price[bookshow.i]+"元");
+                builder.setMessage("您需要支付:"+i*showFragment.price[showFragment.i]+"元");
                 AlertDialog dialog=builder.create();
                 dialog.show();
             }

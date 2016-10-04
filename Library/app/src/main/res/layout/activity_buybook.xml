@@ -46,7 +46,5 @@
             android:id="@+id/Button12"
             android:text="提交"
             />
-
         </LinearLayout>
-
 </LinearLayout>

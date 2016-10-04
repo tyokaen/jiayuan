@@ -18,31 +18,29 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="MainActivity"
-
-            ></activity>
+            android:label="MainActivity" />
         <activity
             android:name=".login"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".Main"
-            android:label="@string/title_activity_main"></activity>
-        <activity
-            android:name=".bookshow"
-            android:label="@string/title_activity_bookshow"></activity>
+            android:label="@string/title_activity_main" />
         <activity
             android:name=".borrowbook"
-            android:label="@string/title_activity_borrowbook"></activity>
+            android:label="@string/title_activity_borrowbook" />
         <activity
             android:name=".research"
-            android:label="@string/title_activity_research"></activity>
+            android:label="@string/title_activity_research" />
         <activity
             android:name=".buybook"
-            android:label="@string/title_activity_buybook"></activity>
+            android:label="@string/title_activity_buybook" />
         <activity
             android:name=".showSpinner"
-            android:label="@string/title_activity_show_spinner"></activity>
-
+            android:label="@string/title_activity_show_spinner" />
+        <activity android:name=".other" />
+        <activity android:name=".jiayuan" />
+        <activity android:name=".showComment" />
+        <activity android:name=".book_info"></activity>
     </application>
 
 </manifest>

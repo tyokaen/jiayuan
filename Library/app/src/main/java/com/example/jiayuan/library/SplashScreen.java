@@ -20,27 +20,19 @@ public class SplashScreen extends Activity {
         welcomeImg.startAnimation(anima);
         anima.setAnimationListener(new AnimationImpl());
     }
-
-
     private class AnimationImpl implements Animation.AnimationListener {
-
         @Override
         public void onAnimationStart(Animation animation) {
             welcomeImg.setBackgroundResource(R.drawable.welcome);
         }
-
         @Override
         public void onAnimationEnd(Animation animation) {
             skip(); // 动画结束后跳转到别的页面
         }
-
         @Override
         public void onAnimationRepeat(Animation animation) {
-
         }
-
     }
-
     private void skip() {
         startActivity(new Intent(this, MainActivity.class));
         finish();

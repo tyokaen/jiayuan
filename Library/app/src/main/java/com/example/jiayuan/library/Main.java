@@ -21,6 +21,7 @@ import android.widget.Toast;
 public class Main extends FragmentActivity {
 RadioGroup radioGroup;
     showFragment showFragment;
+    borrowFragment borrowfragment;
 PopupWindow p=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,40 +40,29 @@ PopupWindow p=null;
                         transaction.commit();
                         break;
                     case R.id.RadioButton2:
-                        Intent intent1 = new Intent(getApplicationContext(), borrowbook.class);
-                        startActivity(intent1);
+                       borrowfragment=new borrowFragment();
+                        FragmentManager manager1=getFragmentManager();
+                        FragmentTransaction transaction1=manager1.beginTransaction();
+                        transaction1.replace(R.id.LinearLayout1,borrowfragment);
+                        transaction1.commit();
                         break;
                     case R.id.RadioButton3:
                         Intent intent2 = new Intent(getApplicationContext(), research.class);
                         startActivity(intent2);
                         break;
                     case R.id.RadioButton4:
-                        if(p!=null){
-                        }
-                        else {
-                            initmPopupWindowView();
-                            p.showAsDropDown(group, 1150, 0);
-                        }
+                        Intent intent3 = new Intent(getApplicationContext(), other.class);
+                        startActivity(intent3);
+                        break;
                 }
             }
         });
-
-    }
-    public void initmPopupWindowView(){
-        View view=getLayoutInflater().inflate(R.layout.pop_window,null,false);
-
-     p = new PopupWindow(view, 250, 280);
-     p.setOutsideTouchable(true);
-
-
-
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

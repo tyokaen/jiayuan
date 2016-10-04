@@ -2,12 +2,7 @@ package com.example.jiayuan.library;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -21,22 +16,25 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import User.Person;
+import User.PersonDao;
+
 
 public class login extends Activity {
 CheckBox c,c1;
 Button b3,b4;
-EditText e2,e3,e4,e5;
-LibraryDbOpenHelper libraryDbOpenHelper;
-public static SharedPreferences sp;
+EditText login_id,login_pwd,login_mail,login_pwd2;
+PersonDao dao;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         c=(CheckBox)findViewById(R.id.CheckBox1);
         c1=(CheckBox)findViewById(R.id.CheckBox2);
-        e2=(EditText)findViewById(R.id.EditText3);
-        e3=(EditText)findViewById(R.id.EditText4);
-        e4=(EditText)findViewById(R.id.EditText5);
-        e5=(EditText)findViewById(R.id.EditText6);
+        login_id=(EditText)findViewById(R.id.Login_ID);
+        login_pwd=(EditText)findViewById(R.id.Login_pwd);
+        login_pwd2 =(EditText)findViewById(R.id.Login_pwd2);
+        login_mail=(EditText)findViewById(R.id.Login_mail);
+        dao=new PersonDao(login.this);
         InputFilter inputFilter=new InputFilter() {
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
                 if(source.toString().matches("^[0-9a-zA@##.##_##-]+$")){
@@ -50,18 +48,18 @@ public static SharedPreferences sp;
         InputFilter[] filters=new InputFilter[]{
                 inputFilter
         };
-        e5.setFilters(filters);
+        login_mail.setFilters(filters);
         b3=(Button)findViewById(R.id.Button4);
         b4=(Button)findViewById(R.id.Button5);
         c.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    e3.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    login_pwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
 
                 }
                 else{
-                    e3.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    login_pwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
             }
         });
@@ -69,18 +67,17 @@ public static SharedPreferences sp;
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    e4.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    login_pwd2.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 }
                 else{
-                    e4.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    login_pwd2.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
             }
         });
-      sp=this.getSharedPreferences("demo-02",MODE_PRIVATE);
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!(e3.getText().toString().equals(e4.getText().toString()))){
+                if(!(login_pwd.getText().toString().equals(login_pwd2.getText().toString()))){
                     AlertDialog.Builder builder=new AlertDialog.Builder(login.this);
                     builder.setTitle("提示");
                     builder.setMessage("两次输入的密码有误");
@@ -88,12 +85,10 @@ public static SharedPreferences sp;
                     alertDialog.show();
                 }
                 else{
-                    SharedPreferences.Editor editor=sp.edit();
-                    String zhanghao=e2.getText().toString();
-                    editor.putString("Zhanghao",zhanghao);
-                    String password=e3.getText().toString();
-                    editor.putString("Password",password);
-                    editor.commit();
+
+                    String zhanghao=login_id.getText().toString();
+                    String password=login_pwd.getText().toString();
+                    dao.add(new Person(zhanghao,password));
                     Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent);
                 }
@@ -103,10 +98,10 @@ public static SharedPreferences sp;
             @Override
             public void onClick(View v) {
                 String recieve[]=new String[1];
-                recieve[0]=e5.getText().toString();
+                recieve[0]=login_mail.getText().toString();
                // String subject=e2.getText().toString();  //获取主题
-                String content=e3.getText().toString();  //攻取内容
-                String content1=e4.getText().toString();
+                String content=login_id.getText().toString();  //攻取内容
+                String content1=login_pwd.getText().toString();
                 Intent intent=new Intent(Intent.ACTION_SEND);   //发送邮件使用ACTION_SEND
                 intent.setType("plain/text");                   //设置类型
                 intent.putExtra(Intent.EXTRA_EMAIL,recieve);
