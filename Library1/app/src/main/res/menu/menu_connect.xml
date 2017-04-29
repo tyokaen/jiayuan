@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+ <item
+     android:icon="@drawable/jia"
+     android:showAsAction="always"
+     android:orderInCategory="1"
+     android:title="@null"
+     android:id="@+id/action_register"
+     />
+<item
+    android:icon="@drawable/a21"
+    android:showAsAction="always"
+    android:id="@+id/connect"
+    android:orderInCategory="2"
+    android:title="@null"
+
+    />
+</menu>

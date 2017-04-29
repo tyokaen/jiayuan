@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:clickable="true" android:foreground="?android:attr/selectableItemBackground"
+    android:layout_width="700dp"
+    android:layout_height="700dp"
+    android:layout_margin="10dp"
+    card_view:cardBackgroundColor="@color/cardview_shadow_end_color"
+    card_view:cardCornerRadius="10dp"
+    app:cardElevation="3dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    >
+<LinearLayout
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    >
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="jiayuan"
+    android:textSize="30sp"
+    android:layout_alignTop="@+id/Pro_img"
+    android:layout_alignBottom="@+id/Pro_img"
+    android:gravity="center"
+    android:layout_marginLeft="50dp"
+    android:id="@+id/Goods_name"
+    />
+<TextView
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:id="@+id/Goods_Intro"
+    android:text="这本书是为了考院生的时候用的,现在不用 急需处理"
+    android:layout_below="@+id/Goods_name"
+    android:maxLines="2"
+    android:layout_marginTop="40dp"
+    />
+<ImageView
+    android:layout_height="300dp"
+    android:layout_width="300dp"
+    android:src="@drawable/a1"
+    android:id="@+id/Goods_Image"
+    />
+ <RelativeLayout
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     >
+ <TextView
+     android:layout_height="wrap_content"
+     android:layout_width="wrap_content"
+     android:id="@+id/Time"
+     android:text="2017年3月15日"
+     android:textSize="20sp"
+     />
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/State"
+        android:text="未购买"
+        android:textSize="20sp"
+        android:layout_toRightOf="@+id/Time"
+        android:layout_alignBottom="@+id/Time"
+        android:layout_marginLeft="15dp"
+        />
+    </RelativeLayout>
+</LinearLayout>
+</android.support.v7.widget.CardView>

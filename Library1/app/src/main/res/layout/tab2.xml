@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    card_view:cardBackgroundColor="@color/cardview_shadow_end_color"
+    card_view:cardCornerRadius="10dp"
+    >
+    <ImageView
+        android:id="@+id/El_img"
+        android:layout_height="250dp"
+        android:layout_width="400dp"
+        android:layout_marginLeft="200dp"
+        />
+    <TextView
+        android:id="@+id/El_price"
+        android:textSize="25sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:id="@+id/El_Address"
+        android:textSize="25sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_toRightOf="@+id/Fur_price"
+        android:layout_alignBottom="@+id/Fur_price"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="250dp"
+        >
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="请各位卖家在此处留言"
+            />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

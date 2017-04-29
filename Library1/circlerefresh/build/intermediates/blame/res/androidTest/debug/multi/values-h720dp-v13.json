@@ -1,0 +1,26 @@
+[
+    {
+        "outputFile": "C:\\Users\\jiayuan\\AndroidStudioProjects\\Library1\\circlerefresh\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 66,
+                    "endOffset": 117
+                },
+                "from": {
+                    "file": "C:\\Users\\jiayuan\\.android\\build-cache\\2dcc95cdfadec555552790bd6e2b3d0e4daeb9de\\output\\res\\values-h720dp-v13\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 294,
+                        "endColumn": 66,
+                        "endOffset": 356
+                    }
+                }
+            }
+        ]
+    }
+]
