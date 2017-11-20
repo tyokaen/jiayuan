@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="city">
+        <item>東京都</item>
+        <item>北海道</item>
+        <item>青森県</item>
+        <item>岩手県</item>
+        <item>宮城県</item>
+        <item>秋田県</item>
+        <item>山形県</item>
+        <item>福島県</item>
+        <item>茨城県</item>
+        <item>栃木県</item>
+        <item>群馬県</item>
+        <item>埼玉県</item>
+        <item>千葉県</item>
+        <item>神奈川県</item>>
+        <item>新潟県</item>
+        <item>富山県</item>
+        <item>福井県</item>
+        <item>山梨県</item>
+        <item>長野県</item>
+        <item>岐阜県</item>
+        <item>静岡県</item>
+        <item>愛知県</item>
+        <item>三重県</item>
+        <item>滋賀県</item>
+        <item>京都府</item>
+        <item>大阪府</item>
+        <item>兵庫県</item>
+        <item>奈良県</item>
+        <item>和歌山県</item>
+        <item>鳥取県</item>
+        <item>岡山県</item>
+        <item>山口県</item>
+        <item>徳島県</item>
+        <item>香川県</item>
+        <item>愛媛県</item>
+        <item>高知県</item>
+        <item>福岡県</item>
+        <item>佐賀県</item>
+        <item>長崎県</item>
+        <item>熊本県</item>
+        <item>大分県</item>
+        <item>宮崎県</item>
+        <item>鹿児島県</item>
+        <item>沖縄県</item>
+    </string-array>
+<string-array name="age">
+    <item>10代</item>
+    <item>20代</item>
+    <item>30代</item>
+    <item>40代</item>
+    <item>50代</item>
+    <item>60代</item>
+</string-array>
+    <string-array name="sex">
+        <item>男性</item>
+        <item>女性</item>
+</string-array>
+<string-array name="problem">
+         <item>初めて買った曲のタイトルは</item>
+         <item>初恋の人の名前は</item>
+         <item>子どものころの夢は</item>
+          <item>座右の銘は</item>
+    <item>初めて飼ったペットの名前は</item>
+    <item>祖父の下の名前は</item>
+    <item>生まれた病院は</item>
+    <item>初めて行った海外の場所は</item>
+    <item>小学校1年生のときの先生は</item>
+    <item>リタイア後に住みたい場所は</item>
+   <item> 初めて見た映画は</item>
+    <item>初めて買った車は</item>
+    <item>おふくろの味といえば</item>
+    <item>中学時代の所属クラブは？</item>
+    </string-array>
+</resources>

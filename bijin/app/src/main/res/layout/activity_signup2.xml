@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/sign2_root"
+    android:orientation="vertical"
+    android:background="@drawable/synchrobackground"
+    tools:context="com.example.jiayuan.bijin.login.signup2">
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/title"
+        android:layout_marginTop="20dp"
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textColor="@color/white"
+        android:text="あなたの情報を詳しく入力頂くことで、"
+        android:textSize="15sp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="あなたと世論のシンクロ率分析の精度が高まります"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:id="@+id/result"
+        />
+        <EditText
+            android:id="@+id/Input_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textColorHint="@color/white"
+            android:background="@drawable/login_edit"
+            android:layout_marginLeft="5dp"
+            android:hint="ニックネーム"
+            android:layout_marginTop="40dp"
+            >
+        </EditText>
+    <TextView
+        android:id="@+id/input_birth"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/login_edit"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:text="生年月日"
+        android:layout_marginTop="40dp"
+        >
+    </TextView>
+        <TextView
+            android:id="@+id/input_region"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="出身地"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:background="@drawable/login_edit"
+            android:layout_marginTop="40dp"
+            >
+        </TextView>
+
+    <RadioGroup android:id="@+id/radioGroup" android:contentDescription="性别" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10dp">
+          <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/radioMale" android:text="man" android:checked="true"></RadioButton>
+             <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/radioFemale" android:text="woman"></RadioButton>
+          </RadioGroup>
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="新規登録"
+        android:textSize="15dp"
+        android:textColor="@color/white"
+        android:background="@drawable/to_guest_button"
+        android:layout_marginTop="1dp"
+        android:layout_gravity="center_horizontal"
+        />
+     </LinearLayout>
+
+
+

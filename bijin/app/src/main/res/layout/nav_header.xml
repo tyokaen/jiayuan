@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@drawable/synchrobackground"
+    >
+<com.example.jiayuan.bijin.diy_view.CircleImageView
+    android:layout_height="150dp"
+    android:layout_width="150dp"
+    android:layout_weight="1"
+    android:scaleType="centerCrop"
+    android:src="@drawable/defaultuserimage"
+    android:layout_gravity="center_horizontal"
+    />
+ <LinearLayout
+     android:layout_weight="1"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal"
+     >
+  <TextView
+      android:layout_weight="1"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content"
+      android:id="@+id/User_identi"
+      android:text="研究员"
+      android:textSize="20dp"
+      />
+ <ImageView
+     android:layout_weight="1"
+     android:layout_height="20dp"
+     android:layout_width="1dp"
+     android:src="@drawable/mypageline"
+     />
+  <TextView
+      android:layout_weight="1"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content"
+      android:id="@+id/User_name"
+      android:text="jiayuan"
+      android:textSize="20dp"
+      android:layout_marginLeft="100dp"
+      />
+  </LinearLayout>
+</LinearLayout>

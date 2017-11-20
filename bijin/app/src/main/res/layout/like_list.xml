@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:orientation="horizontal"
+    >
+<LinearLayout
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    >
+<ImageView
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:src="@drawable/rank1"
+    android:layout_marginTop="10dp"
+    />
+<ImageView
+   android:layout_height="wrap_content"
+   android:layout_width="wrap_content"
+   android:layout_marginTop="15dp"
+    android:id="@+id/image_best1"
+    />
+ <Button
+    android:background="@drawable/sign_up"
+    android:text="ベスト1を選ぶ"
+    android:textColor="@color/white"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:id="@+id/btn_best1"
+    />
+</LinearLayout>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="150dp"
+        >
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/rank2"
+            android:layout_marginTop="10dp"
+            />
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/image_best2"
+            android:layout_marginTop="15dp"
+            />
+        <Button
+            android:background="@drawable/sign_up"
+            android:text="ベスト2を選ぶ"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:id="@+id/btn_best2"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="150dp"
+        >
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/rank3"
+            android:layout_marginTop="10dp"
+            />
+        <ImageView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/image_best3"
+            android:layout_marginTop="15dp"
+            />
+        <Button
+            android:background="@drawable/sign_up"
+            android:text="ベスト3を選ぶ"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:id="@+id/btn_best3"
+            />
+    </LinearLayout>
+</LinearLayout>
+    <View
+        android:background="#9e9e9e"
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_marginTop="20dp"
+        />
+　　<View
+        android:background="#9e9e9e"
+        android:layout_height="1sp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+    />
+<TextView
+    android:layout_gravity="center_horizontal"
+    android:textSize="30dp"
+    android:text="LIKE リスト"
+
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    />
+<com.example.jiayuan.bijin.diy_view.MyGridView
+    android:layout_marginTop="20dp"
+    android:id="@+id/Grid1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:numColumns="4"
+    android:verticalSpacing="10dp"
+    android:horizontalSpacing="10dp"
+    />
+</LinearLayout>
+</ScrollView>

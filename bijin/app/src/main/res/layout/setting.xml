@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:example="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+<com.example.jiayuan.bijin.diy_view.MysettingView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    example:title="プロファイル設定"
+    android:id="@+id/user_setting"
+   />
+    <com.example.jiayuan.bijin.diy_view.MysettingView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        example:title="利用規約"
+        android:layout_marginTop="15dp"
+        android:id="@+id/rule_setting"
+        />
+    <com.example.jiayuan.bijin.diy_view.MysettingView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        example:title="プライバシーポリシー"
+        android:layout_marginTop="15dp"
+        android:id="@+id/priv_setting"
+        /><com.example.jiayuan.bijin.diy_view.MysettingView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    example:title="ログアウト"
+    android:layout_marginTop="15dp"
+    android:id="@+id/logout_setting"
+    />
+
+</LinearLayout>

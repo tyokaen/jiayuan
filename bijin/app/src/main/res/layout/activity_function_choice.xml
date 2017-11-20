@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main"
+    android:orientation="vertical"
+    tools:context="com.example.jiayuan.bijin.function_choice">
+<TextView
+    android:text="実験は完了しました。"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center_horizontal"
+    />
+    <TextView
+        android:text="ご協力ありがとうございます"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        />
+<Button
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:text="ユーザ登録"
+    android:textSize="15dp"
+    android:textColor="@color/white"
+    android:id="@+id/To_SignUp"
+    android:background="@drawable/to_guest_button"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="40dp"
+    />
+<Button
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:text="ログイン"
+    android:textSize="15dp"
+    android:textColor="@color/white"
+    android:background="@drawable/to_guest_button"
+    android:id="@+id/To_login"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="40dp"
+    />
+    <Button
+        android:id="@+id/To_ImageChoice"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/to_guest_button"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:text="もう一回入力"
+        />
+</LinearLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+<LinearLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="#F07C4E"
+    android:layout_marginTop="15dp"
+    >
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:background="#DB551D"
+    android:paddingBottom="8dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="8dp"
+    android:textColor="#ffffff"
+    android:textSize="16dp"
+    android:id="@+id/progress_recoder"
+></TextView>
+    <ProgressBar
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:layout_gravity="center_vertical"
+        android:paddingBottom="6dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="6dp"
+        android:progress="0"
+        android:progressDrawable="@drawable/blue_progress_bar"
+        android:id="@+id/sample_progress"
+        ></ProgressBar>
+    </LinearLayout>
+ <TextView
+     android:layout_height="wrap_content"
+     android:layout_width="wrap_content"
+     android:id="@+id/sample_count"
+     android:textSize="30dp"
+     android:text="あと4枚"
+     android:layout_gravity="center_horizontal"
+     android:layout_marginTop="40dp"
+     />
+<ImageSwitcher
+    android:id="@+id/Gallery1"
+    android:layout_width="200dp"
+    android:layout_height="150dp"
+    android:layout_marginTop="50dp"
+    android:layout_gravity="center"
+    />
+<LinearLayout
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="30dp"
+    >
+<ImageButton
+    android:id="@+id/sample_dislake"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/next"
+    android:layout_marginLeft="50dp"
+    />
+<ImageButton
+    android:id="@+id/sample_like"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/like"
+    android:layout_marginLeft="100dp"
+    />
+</LinearLayout>
+</LinearLayout>

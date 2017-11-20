@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MysettingView">
+    <attr name="title" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="MyPageView">
+     <attr name="pagetitle" format="string"/>
+      <attr name="pagetext" format="string"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/item1"
+    android:title="マイページ"
+    android:icon="@drawable/menumypage"
+    />
+<item
+    android:id="@+id/item2"
+    android:title="サンプル入力"
+    android:icon="@drawable/menuinput"
+    />
+<item
+    android:id="@+id/item3"
+    android:title="人気ランキング"
+    android:icon="@drawable/menuranking"
+    />
+<item
+    android:id="@+id/item4"
+    android:title="趣向レコメンド"
+    android:icon="@drawable/menulikelist"
+    />
+<item
+    android:id="@+id/item5"
+    android:title="世論シンクロ率"
+    android:icon="@drawable/menusynchro"
+    />
+<item
+    android:id="@+id/item6"
+    android:title="美人チャレンジ"
+    android:icon="@drawable/menuranking"
+    />
+<item
+    android:id="@+id/item7"
+    android:title="LIKEリスト"
+    android:icon="@drawable/menulikelist"
+    />
+<item
+    android:id="@+id/item8"
+    android:title="設定"
+    android:icon="@drawable/menusetting"
+    />
+</menu>

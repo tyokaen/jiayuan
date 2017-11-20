@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+<TextView
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:textSize="30dp"
+    android:text="美人ランキングとは"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="15dp"
+    />
+<TextView
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:text="@string/beauty_chall_Des"
+    android:textSize="20dp"
+    android:layout_marginTop="150dp"
+   />
+<Button
+    android:id="@+id/choose_image"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:background="@drawable/sign_up"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="20dp"
+    android:text="写真を選ぶ"
+    android:textSize="15dp"
+    />
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/ImageView1"
+        android:layout_marginTop="100dp"
+        />
+</LinearLayout>

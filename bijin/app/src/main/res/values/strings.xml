@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">bijin</string>
+    <string name="title_name">美 人 科 学 研 究 所</string>
+    <string name="login">登録</string>>
+    <string name="register">新規ユーザ</string>
+    <string name="ID">ID</string>
+    <string name="Psd">パスワード</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="beauty_chall_Des">美人ビッグデータから求めたランキングを元に、あなたが
+    世間の美人度合いにマッチするをランキングで判定します。美人は時代と共に変します。今日のあなたは明日
+    のあなたより美人になっているでしょうか？そんな疑問に答える美人ランキングにチャレンジしてみましょう。
+    </string>
+    <string name="agree_Des">
+        サンプル入力数、実験参加者数の増加に応じ、ランキングの判定精度が向上する仕組みです。実験参加数が
+        一定水準を超えるまでは精度があいまいとなる可能性がございますので、あらかじめご了承ください。また、
+        男性画像を登録した場合、正しいランキングが算出できない可能性があります。
+    </string>
+    <string name="rangking_Des">
+        あなたは現代のクレオバトラ。流行の美人要素を兼ね備えています。コンテストやグランプリに出るなら今
+        かもしれません。
+        </string>
+    <string name="opinion_Des">
+        シンクロ率とは、あなたの美人センスと世界の美人センスがどれだけ一致するかを統計的に解析した新しい指標です。
+        あなたのシンクロ率はどれだけ世間に一致しているのか判定します。
+    </string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+</resources>
