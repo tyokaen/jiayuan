@@ -21,13 +21,16 @@
         <activity android:name=".user_main" />
         <activity android:name=".login.signup" />
         <activity android:name=".login.signup2" />
-        <activity android:name=".login.MainActivity" />
+        <activity
+            android:name=".login.MainActivity"
+            android:exported="true" />
         <activity android:name=".Image_Choice" />
         <activity android:name=".function_choice" />
         <activity
             android:name=".entrance"
             android:label="@string/title_activity_splash_screen"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Fragment.bijin_detail"></activity>
     </application>
 
 </manifest>

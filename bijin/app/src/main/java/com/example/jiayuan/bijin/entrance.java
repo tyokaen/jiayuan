@@ -45,7 +45,7 @@ class MyHandler extends Handler{
             dialog.cancel();
             textView.setText(result);
             textView1.setText(ImageToken);
-             ShiftToImage(result);
+             ShiftToImage(result,(String)msg.obj);
         }
     }
 }
@@ -75,10 +75,10 @@ class MyHandler extends Handler{
     public void createDialog(){
         dialog=ProgressDialog.show(this,"提示","正在获取");
     }
-    public void ShiftToImage(String target){
+    public void ShiftToImage(String target ,String Imageinfo){
             if(target.equals("true")) {
                 Intent intent = new Intent(this, Image_Choice.class);
-                intent.putExtra("ImageToken",ImageToken);
+                intent.putExtra("ImageToken", Imageinfo);
                 intent.putExtra("UserToken",UserToken);
                 startActivity(intent);
             }
@@ -106,11 +106,8 @@ class MyHandler extends Handler{
                 }  catch (IOException e) {
                     e.printStackTrace();
                 }
-                ImageToken= OkhttpGet.UseGet(httpClient,"http://192.168.0.118/BijinTemp/index.php/api/bijin/setup?user_token=4cc2dd5dd4d3e24738606d97aac890b0&count=10","X-BijinScience",
-                        "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl",body);
-                Message message = new Message();
-                message.arg1 = 1;
-                myhadler.sendMessage(message);
+              OkhttpGet.UseGetString(httpClient,"http://192.168.0.118/BijinTemp/index.php/api/bijin/setup?user_token=4cc2dd5dd4d3e24738606d97aac890b0&count=10","X-BijinScience",
+                        "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl",body,myhadler,1);
             }
         }).start();
 }

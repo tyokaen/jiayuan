@@ -1,9 +1,13 @@
 package com.example.jiayuan.bijin;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +24,15 @@ import com.example.jiayuan.bijin.Fragment.SampleFragment;
 import com.example.jiayuan.bijin.Fragment.SettingFragment;
 import com.example.jiayuan.bijin.Fragment.opinionFragment;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+import okhttp3.OkHttpClient;
+
 public class user_main extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
@@ -35,7 +48,26 @@ public class user_main extends AppCompatActivity {
     opinionFragment opinionfragment=null;
    android.support.v4.app.Fragment myPageFragment=null;
     android.support.v4.app.FragmentManager fragmentManger;
+    ExecutorService executorService= Executors.newSingleThreadExecutor();
+    String imagetoken=null;
+    ArrayList<String>bijinToken=new ArrayList<String>();
+    OkHttpClient okHttpClient=new OkHttpClient();
+    JSONArray jsonArray=null;
+    MyHandler myHandler=new MyHandler();
+    ProgressDialog progressdialog=null;
+    StringBuffer sb=new StringBuffer();
+    ArrayList<Future> futureArrayList=new ArrayList<Future>();
+    class MyHandler extends Handler{
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(msg.arg1==50) {
+                //getToken(arraylist);
+              // getToken(futureArrayList);
 
+            }
+        }
+    }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main);
@@ -70,11 +102,12 @@ public class user_main extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                android.support.v4.app.FragmentManager fragmentManager=getSupportFragmentManager();
-                FragmentTransaction trans=fragmentManager.beginTransaction();
+                FragmentManager fragmentManager=getSupportFragmentManager();
+                FragmentTransaction trans;
+                trans=fragmentManager.beginTransaction();
                 switch (item.getItemId()){
                     case R.id.item1:
-                        Transction(R.id.frg_root,myPageFragment,"com.example.jiayuan.bijin.Fragment.MyPageFragment",trans);
+                        Transction(R.id.frg_root, myPageFragment, "com.example.jiayuan.bijin.Fragment.MyPageFragment", trans);
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.item2:
@@ -102,19 +135,11 @@ public class user_main extends AppCompatActivity {
                         Transction(R.id.frg_root,settingFragment,"com.example.jiayuan.bijin.Fragment.SettingFragment",trans);
                         drawerLayout.closeDrawers();
                         break;
-
                 }
                 return true;
             }
         });
     }
-   // public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-       // getMenuInflater().inflate(R.menu.main_menu, menu);
-       // setIconEnable(menu,true);
-       // menu.add("jiayuan").setIcon(R.drawable.beauty);
-       // return true;
-    //}
     public void Transction(int id, android.support.v4.app.Fragment fragment, String classname,FragmentTransaction transaction){
        Class clazz=null;
            try {
@@ -139,6 +164,44 @@ public class user_main extends AppCompatActivity {
            }
 
     }
+
+
+    public void createDialog() {
+        progressdialog = ProgressDialog.show(this, "提示", "正在获取");
+    }
+    /*
+    public void getRankingImage() {
+        final RequestBody body = null;
+        for (int i = 10; i <= 50; i = i + 10) {
+            final int finalI = i;
+            Future future = executorService.submit(new Callable() {
+                @Override
+                public Object call() throws Exception {
+                    imagetoken = OkhttpGet.UseGet(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/general/trend?generation=" + finalI + "&count=" + 5, "X-BijinScience",
+                            "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", body);
+                    Message message=new Message();
+                    message.arg1=finalI;
+                    myHandler.sendMessage(message);
+                    return imagetoken;
+                }
+            });
+            futureArrayList.add(future);
+        }
+    }
+    public void getToken(ArrayList<Future> list){
+        for(int i=0;i<list.size();i++){
+            try {
+                jsonArray= StringToJson.getJSonArray(jsonArray,(String) list.get(i).get(),"popular_bijin");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            StringToJson.getImageToken(bijinToken,jsonArray,"bijin_token");
+        }
+
+    }
+    */
 
     }
 

@@ -28,6 +28,7 @@ ImageView image_title;
 
     }
 
+
     private void init(){
         View view=View.inflate(getContext(), R.layout.my_page_zuhe,this);
         tx_title=(TextView) view.findViewById(R.id.sample_number_title);

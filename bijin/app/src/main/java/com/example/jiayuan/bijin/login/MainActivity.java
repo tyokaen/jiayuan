@@ -22,12 +22,18 @@ import com.example.jiayuan.bijin.user_main;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText Ed_id, Ed_pwd;
-    TextView textView=null;
+    TextView textView=null,textView1,textView2,textView3,textView4,textView5;
     Button Btn_login, Btn_register;
     TextView Tx_res;
     TextWatcher textWatcher=null;
@@ -37,19 +43,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String result=null;
     MyHandler myhandler=new MyHandler();
     String flag="";
+    ArrayList<String> arrayList=new ArrayList<String>();
     OkHttpClient okHttpClient=new OkHttpClient();
+    String imagetoken=null;
+    StringBuffer sb=new StringBuffer();
+ExecutorService executorService= Executors.newCachedThreadPool();
+    int count=1;
+    MyHandler myHandler=new MyHandler();
+    ArrayList<Future> futureArrayList=new ArrayList<Future>();
     class MyHandler extends Handler{
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if(msg.obj.equals("true")){
-                Intent intent=new Intent(MainActivity.this,user_main.class);
-                startActivity(intent);
+            if (msg.arg1==50) {
+                getSb();
+                textView5.setText(sb.toString());
             }
-            else if(msg.obj.equals("false")){
-                Toast.makeText(MainActivity.this,"密码或账号有误",Toast.LENGTH_SHORT).show();
-            }
-
         }
     }
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (s.length() > 0 && Ed_pwd.getText().length() > 0) {
                     Btn_login.setClickable(true);
                     Btn_login.setBackgroundColor(Color.parseColor("#FF8C00"));
-
                 }
             }
         };
@@ -84,6 +91,11 @@ public void init(){
     Ed_pwd=(EditText)findViewById(R.id.Input_Pwd);
     Btn_login=(Button)findViewById(R.id.login);
     textView=(TextView) findViewById(R.id.forget_pwd);
+    textView1=(TextView) findViewById(R.id.te1);
+    textView2=(TextView)findViewById(R.id.te2);
+    textView3=(TextView) findViewById(R.id.te3);
+    textView4=(TextView)findViewById(R.id.te4);
+    textView5=(TextView) findViewById(R.id.te5);
     main_scroll=(ScrollView)findViewById(R.id.main_root);
    // Btn_register.setBackgroundColor(Color.parseColor("#FF8C00"));
 }
@@ -94,11 +106,13 @@ public void init(){
                // Intent intent=new Intent(this,signup.class);
                // startActivity(intent);
             case R.id.login:
-                login_success(Ed_id.getText().toString(),Ed_pwd.getText().toString());
                 //login_success(Ed_id.getText().toString(),Ed_pwd.getText().toString());
+                //login_success(Ed_id.getText().toString(),Ed_pwd.getText().toString());
+            //getRankingImage();
+                Intent intent=new Intent(MainActivity.this,user_main.class);
+                startActivity(intent);
         }
     }
-
     public  void ShiftToMain(String Id,String Pwd){
         if(login_success(Id,Pwd)){
             Intent intent=new Intent(this, user_main.class);
@@ -109,17 +123,14 @@ public void init(){
         }
     }
     public boolean login_success(String Id,String Pwd){
-
         final FormBody formBody=new FormBody.Builder()
                 .add("screen_name",Id)
                 .add("password",Pwd)
                 .add("device_os","ios")
                 .build();
         new Thread(new Runnable() {
-            @Override
             public void run() {
                 result= OkhttpGet.UsePost(okHttpClient,"http://192.168.0.118/BijinTemp/index.php/api/login","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", formBody);
-
                 try {
                     flag= StringToJson.ToJSon(result).getString("result");
                 } catch (JSONException e) {
@@ -131,7 +142,23 @@ public void init(){
                 myhandler.sendMessage(message);
             }
         }).start();
-
        return Boolean.parseBoolean(flag);
     }
-}
+       public void getSb(){
+        for(Future future:futureArrayList){
+            try {
+                sb.append((String)future.get());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    }
+
+
+
+

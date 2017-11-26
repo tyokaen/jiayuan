@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.jiayuan.bijin.diy_view.MyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:jia="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/scrollView"
     >
  <LinearLayout
      android:layout_height="match_parent"
@@ -20,35 +21,35 @@
       android:layout_height="100dp"
       android:layout_width="100dp"
       android:scaleType="fitCenter"
+      android:layout_marginLeft="20dp"
       />
    <LinearLayout
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"
        android:orientation="vertical"
        >
+
    <TextView
-       android:text="研究員No1"
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"
        android:textSize="15dp"
+       android:layout_weight="1"
+       android:text="研究員No.4307"
        />
        <TextView
-           android:text="理事"
            android:layout_height="wrap_content"
            android:layout_width="wrap_content"
-           android:textSize="15dp"
+           android:textSize="25dp"
+           android:layout_weight="1"
+           android:textColor="@color/black"
+           android:id="@+id/user_screen_name"
            />
        <TextView
-           android:text="張"
            android:layout_height="wrap_content"
            android:layout_width="wrap_content"
            android:textSize="15dp"
-           />
-       <TextView
-           android:text="生年月日:1992/01/12"
-           android:layout_height="wrap_content"
-           android:layout_width="wrap_content"
-           android:textSize="15dp"
+           android:layout_weight="1"
+           android:id="@+id/user_birth"
            />
    </LinearLayout>
  </LinearLayout>
@@ -61,7 +62,6 @@
     android:layout_width="250dp"
     android:layout_height="200dp"
     jia:pagetitle="サンプル入力数"
-    jia:pagetext="150"
     android:id="@+id/sample_count"
     android:layout_weight="1"
     />
@@ -74,21 +74,7 @@
         android:layout_width="250dp"
         android:layout_height="200dp"
         jia:pagetitle="世論シンクロ率"
-        jia:pagetext="72%"
         android:id="@+id/opinion_count"
-        android:layout_weight="1"
-        />
-    <ImageView
-        android:src="@drawable/mypageline"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        />
-    <com.example.jiayuan.bijin.diy_view.MyPageView
-        android:layout_width="250dp"
-        android:layout_height="200dp"
-        jia:pagetitle="チャレンジランキング"
-        jia:pagetext="15位"
-        android:id="@+id/challenge_count"
         android:layout_weight="1"
         />
     </LinearLayout>
@@ -99,17 +85,19 @@
      >
  <ImageView
      android:src="@drawable/info"
-     android:layout_height="wrap_content"
-     android:layout_width="wrap_content"
-     android:layout_marginLeft="200dp"
+     android:layout_height="20dp"
+     android:layout_width="20dp"
+     android:layout_weight="1"
      />
   <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center_horizontal"
-      android:text="理事まであと0枚!!"
-      android:textSize="25dp"
-      android:layout_marginLeft="10dp"
+      android:text=""
+      android:id="@+id/if_likelist"
+      android:textSize="15dp"
+      android:textColor="@color/red"
+      android:layout_weight="2"
       />
      </LinearLayout>
     <View
@@ -118,40 +106,17 @@
         android:layout_height="1sp"
         android:layout_marginTop="10dp"
         />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        >
-      <ImageView
-         android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:src="@drawable/marketman"
-          android:layout_marginLeft="200dp"
-          />
-        <TextView
-          android:layout_height="wrap_content"
-          android:layout_width="wrap_content"
-          android:text="市場動向レポート"
-          android:layout_marginLeft="15dp"
-          android:textSize="25dp"
-            />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/marketwoman"
-            android:layout_marginLeft="15dp"
-            />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:orientation="horizontal"
-            >
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:layout_marginTop="30dp"
+         >
          <LinearLayout
-             android:layout_width="400dp"
-             android:layout_height="300dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
              android:orientation="vertical"
+             android:layout_weight="1"
              >
            <LinearLayout
                android:layout_width="400dp"
@@ -159,8 +124,8 @@
                android:orientation="horizontal"
                >
           <ImageView
-              android:layout_height="wrap_content"
-              android:layout_width="wrap_content"
+              android:layout_height="20dp"
+              android:layout_width="20dp"
               android:src="@drawable/experimentheader"
               />
            <TextView
@@ -168,146 +133,57 @@
                android:layout_height="wrap_content"
                android:text="研究員総数"
                android:textSize="20dp"
+               android:textColor="@color/blue"
                android:layout_marginLeft="10dp"
                />
                </LinearLayout>
              <TextView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="26名"
-                 android:layout_marginTop="30dp"
-                 android:textSize="20dp"
+                 android:id="@+id/user_total"
+                 android:layout_marginTop="10dp"
+                 android:textSize="30dp"
+                 android:textColor="@color/black"
                  android:layout_marginLeft="30dp"
                  />
-               <LinearLayout
-                   android:layout_width="400dp"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:layout_marginTop="20dp"
-                   >
-               <ImageView
-                   android:layout_height="wrap_content"
-                   android:layout_width="wrap_content"
-                   android:src="@drawable/manheader"
-                   />
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="男性からの人気"
-                   android:textSize="20dp"
-                   android:layout_marginLeft="10dp"
-                   />
-</LinearLayout>
-               <LinearLayout
-                   android:layout_width="400dp"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                  >
-               <ImageView
-                   android:src="@drawable/beauty"
-                   android:layout_height="80dp"
-                   android:layout_width="80dp"
-                   />
-               <ImageView
-                   android:src="@drawable/beauty"
-                   android:layout_height="80dp"
-                   android:layout_width="80dp"
-                   android:layout_marginLeft="25dp"
-                   />
-               <ImageView
-                   android:src="@drawable/beauty"
-                   android:layout_height="80dp"
-                   android:layout_width="80dp"
-                   android:layout_marginLeft="25dp"
-                   />
             </LinearLayout>
-            </LinearLayout>
-            <ImageView
-                android:src="@drawable/mypageline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-            <LinearLayout
-                android:layout_width="400dp"
-                android:layout_height="300dp"
-                android:orientation="vertical"
-                >
-             <LinearLayout
-                 android:layout_width="400dp"
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:orientation="vertical"
+             >
+           <com.example.jiayuan.bijin.diy_view.WorldRankingView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:layout_weight="1"
+             android:id="@+id/world_man"
+             />
+             <com.example.jiayuan.bijin.diy_view.WorldRankingView
                  android:layout_height="wrap_content"
-                 android:orientation="horizontal"
-                 >
-              <ImageView
-                  android:layout_height="wrap_content"
-                  android:layout_width="wrap_content"
-                  android:src="@drawable/man"
-                  />
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="85%"
-                   />
-                 </LinearLayout>
-                 <LinearLayout
-                     android:layout_width="400dp"
-                     android:layout_height="wrap_content"
-                     android:orientation="horizontal"
-                     >
-                     <ImageView
-                         android:layout_height="wrap_content"
-                         android:layout_width="wrap_content"
-                         android:src="@drawable/woman"
-                         />
-                     <TextView
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="15%"
-                         />
-                 </LinearLayout>
-                 <LinearLayout
-                     android:layout_width="400dp"
-                     android:layout_height="wrap_content"
-                     android:orientation="horizontal"
-                     android:layout_marginTop="55dp"
-                     >
-                     <ImageView
-                         android:layout_height="wrap_content"
-                         android:layout_width="wrap_content"
-                         android:src="@drawable/womanheader"
-                         />
-                     <TextView
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:text="女性からの人気"
-                         android:textSize="20dp"
-                         android:layout_marginLeft="10dp"
-                         />
-                 </LinearLayout>
-
-                 <LinearLayout
-                     android:layout_width="400dp"
-                     android:layout_height="wrap_content"
-                     android:orientation="horizontal"
-                     >
-                     <ImageView
-                         android:src="@drawable/beauty"
-                         android:layout_height="80dp"
-                         android:layout_width="80dp"
-                         />
-                     <ImageView
-                         android:src="@drawable/beauty"
-                         android:layout_height="80dp"
-                         android:layout_width="80dp"
-                         android:layout_marginLeft="25dp"
-                         />
-                     <ImageView
-                         android:src="@drawable/beauty"
-                         android:layout_height="80dp"
-                         android:layout_width="80dp"
-                         android:layout_marginLeft="25dp"
-                         />
-                 </LinearLayout>
+                 android:layout_width="wrap_content"
+                 android:layout_weight="1"
+                 android:id="@+id/world_woman"
+                 />
              </LinearLayout>
+         </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                >
+             <com.example.jiayuan.bijin.diy_view.MaleRankingView
+                 android:layout_weight="1"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/man_ranking"
+                 />
+                <com.example.jiayuan.bijin.diy_view.MaleRankingView
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/woman_ranking"
+                    />
         </LinearLayout>
           <LinearLayout
               android:layout_height="wrap_content"
@@ -316,14 +192,15 @@
               android:layout_marginTop="20dp"
               >
            <ImageView
-               android:layout_height="wrap_content"
-               android:layout_width="wrap_content"
+               android:layout_height="20dp"
+               android:layout_width="20dp"
                android:src="@drawable/rankingheader"
                />
               <TextView
                   android:layout_height="wrap_content"
                   android:layout_width="wrap_content"
                   android:text="人気傾向に近い芸能人・有名人"
+                  android:textColor="@color/blue"
                   />
               </LinearLayout>
             <LinearLayout
@@ -357,155 +234,75 @@
          android:layout_height="wrap_content"
          android:layout_width="match_parent"
          android:orientation="horizontal"
-         android:layout_marginTop="10dp"
-         >
-         <ImageView
-             android:src="@drawable/rank10"
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             />
-         <ImageView
-             android:src="@drawable/beauty"
-             android:layout_height="60dp"
-             android:layout_width="60dp"
-             android:layout_marginLeft="15dp"
-             />
-         <ImageView
-             android:src="@drawable/beauty"
-             android:layout_height="60dp"
-             android:layout_width="60dp"
-             android:layout_marginLeft="15dp"
-             />
-         <ImageView
-             android:src="@drawable/beauty"
-             android:layout_height="60dp"
-             android:layout_width="60dp"
-             android:layout_marginLeft="15dp"
-             />
-     </LinearLayout>
-     <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:orientation="horizontal"
-         android:layout_marginTop="10dp"
-         >
-         <ImageView
-             android:src="@drawable/rank20"
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             />
-         <ImageView
-             android:src="@drawable/beauty"
-             android:layout_height="60dp"
-             android:layout_width="60dp"
-             android:layout_marginLeft="15dp"
-             />
-         <ImageView
-             android:src="@drawable/beauty"
-             android:layout_height="60dp"
-             android:layout_width="60dp"
-             android:layout_marginLeft="15dp"
-             />
-         <ImageView
-             android:src="@drawable/beauty"
-             android:layout_height="60dp"
-             android:layout_width="60dp"
-             android:layout_marginLeft="15dp"
-             />
-     </LinearLayout>
-     <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:orientation="horizontal"
          android:layout_marginTop="20dp"
          >
          <ImageView
-             android:src="@drawable/rank30"
+             android:layout_height="20dp"
+             android:layout_width="20dp"
+             android:src="@drawable/rankingheader"
+             />
+         <TextView
              android:layout_height="wrap_content"
              android:layout_width="wrap_content"
-             />
-         <ImageView
-             android:src="@drawable/beauty"
-             android:layout_height="60dp"
-             android:layout_width="60dp"
-             android:layout_marginLeft="15dp"
-             />
-         <ImageView
-             android:src="@drawable/beauty"
-             android:layout_height="60dp"
-             android:layout_width="60dp"
-             android:layout_marginLeft="15dp"
-             />
-         <ImageView
-             android:src="@drawable/beauty"
-             android:layout_height="60dp"
-             android:layout_width="60dp"
-             android:layout_marginLeft="15dp"
+             android:text="年代別人気"
+             android:textColor="@color/blue"
              />
      </LinearLayout>
-     <LinearLayout
-         android:layout_height="wrap_content"
+ <com.example.jiayuan.bijin.diy_view.AgeRankingView
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:id="@+id/age_ten"
+     android:layout_marginTop="30dp"
+     />
+     <com.example.jiayuan.bijin.diy_view.AgeRankingView
          android:layout_width="match_parent"
-         android:orientation="horizontal"
-         android:layout_marginTop="20dp"
-         >
-         <ImageView
-             android:src="@drawable/rank40"
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-
-             />
-         <ImageView
-             android:src="@drawable/beauty"
-             android:layout_height="60dp"
-             android:layout_width="60dp"
-             android:layout_marginLeft="15dp"
-             />
-         <ImageView
-             android:src="@drawable/beauty"
-             android:layout_height="60dp"
-             android:layout_width="60dp"
-             android:layout_marginLeft="15dp"
-             />
-         <ImageView
-             android:src="@drawable/beauty"
-             android:layout_height="60dp"
-             android:layout_width="60dp"
-             android:layout_marginLeft="15dp"
-             />
-     </LinearLayout>
-     <LinearLayout
          android:layout_height="wrap_content"
+         android:id="@+id/age_twenty"
+         android:layout_marginTop="30dp"
+         />
+     <com.example.jiayuan.bijin.diy_view.AgeRankingView
          android:layout_width="match_parent"
-         android:orientation="horizontal"
-         android:layout_marginTop="20dp"
-         >
-         <ImageView
-             android:src="@drawable/rank50"
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             />
-         <ImageView
-             android:src="@drawable/beauty"
-             android:layout_height="60dp"
-             android:layout_width="60dp"
-             android:layout_marginLeft="15dp"
-             />
-         <ImageView
-             android:src="@drawable/beauty"
-             android:layout_height="60dp"
-             android:layout_width="60dp"
-             android:layout_marginLeft="15dp"
-             />
-         <ImageView
-             android:src="@drawable/beauty"
-             android:layout_height="60dp"
-             android:layout_width="60dp"
-             android:layout_marginLeft="15dp"
-             />
-     </LinearLayout>
-
-
+         android:layout_height="wrap_content"
+         android:id="@+id/age_thirty"
+         android:layout_marginTop="30dp"
+         />
+     <com.example.jiayuan.bijin.diy_view.AgeRankingView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:id="@+id/age_forty"
+         android:layout_marginTop="30dp"
+         />
+     <com.example.jiayuan.bijin.diy_view.AgeRankingView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:id="@+id/age_fifty"
+         android:layout_marginTop="30dp"
+         />
+     <TextView
+         android:id="@+id/testResult"
+         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+         />
+     <TextView
+         android:id="@+id/testResult2"
+         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+         />
+     <TextView
+         android:id="@+id/testResult3"
+         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+         />
+     <TextView
+         android:id="@+id/testResult4"
+         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+         />
+     <TextView
+         android:id="@+id/testResult5"
+         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+         />
             </LinearLayout>
 
-</ScrollView>
+</com.example.jiayuan.bijin.diy_view.MyScrollView>
