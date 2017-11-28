@@ -18,12 +18,12 @@ import android.widget.Toast;
 import com.example.jiayuan.bijin.Okhttp.OkhttpGet;
 import com.example.jiayuan.bijin.R;
 import com.example.jiayuan.bijin.Tools.StringToJson;
+import com.example.jiayuan.bijin.cache.UserTokenCache;
 import com.example.jiayuan.bijin.user_main;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -54,9 +54,9 @@ ExecutorService executorService= Executors.newCachedThreadPool();
     class MyHandler extends Handler{
         @Override
         public void handleMessage(Message msg) {
-            if (msg.arg1==50) {
-                getSb();
-                textView5.setText(sb.toString());
+            if (msg.arg1==1) {
+                UserTokenCache.getInstance().storeUserToken(MainActivity.this,StringToJson.JsonToString(result,"user_token"));
+                ShiftToMain(Boolean.parseBoolean((String)msg.obj));
             }
         }
     }
@@ -106,15 +106,13 @@ public void init(){
                // Intent intent=new Intent(this,signup.class);
                // startActivity(intent);
             case R.id.login:
-                //login_success(Ed_id.getText().toString(),Ed_pwd.getText().toString());
+                login_success(Ed_id.getText().toString(),Ed_pwd.getText().toString());
                 //login_success(Ed_id.getText().toString(),Ed_pwd.getText().toString());
             //getRankingImage();
-                Intent intent=new Intent(MainActivity.this,user_main.class);
-                startActivity(intent);
         }
     }
-    public  void ShiftToMain(String Id,String Pwd){
-        if(login_success(Id,Pwd)){
+    public  void ShiftToMain(boolean flag){
+        if(flag){
             Intent intent=new Intent(this, user_main.class);
             startActivity(intent);
         }
@@ -144,19 +142,6 @@ public void init(){
         }).start();
        return Boolean.parseBoolean(flag);
     }
-       public void getSb(){
-        for(Future future:futureArrayList){
-            try {
-                sb.append((String)future.get());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
     }
 
 

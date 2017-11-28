@@ -1,5 +1,6 @@
 package com.example.jiayuan.bijin.login;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +20,7 @@ import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.example.jiayuan.bijin.Okhttp.OkhttpGet;
 import com.example.jiayuan.bijin.R;
+import com.example.jiayuan.bijin.Tools.StringToJson;
 
 import org.json.JSONObject;
 
@@ -52,6 +54,10 @@ public class signup2 extends AppCompatActivity implements View.OnClickListener {
             super.handleMessage(msg);
             if(msg.arg1==1)
                 Tx_result.setText(result);
+            if(StringToJson.JsonToString(result,"result").equals("true")){
+                Intent intent=new Intent(signup2.this,MainActivity.class);
+                startActivity(intent);
+            }
         }
     }
     @Override

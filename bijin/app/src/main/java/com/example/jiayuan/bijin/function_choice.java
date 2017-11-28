@@ -28,6 +28,7 @@ class Myhandler extends Handler{
         if(msg.arg1==1) {
             Intent intentChoice = new Intent(function_choice.this, Image_Choice.class);
             intentChoice.putExtra("ImageToken", (String)msg.obj);
+            intentChoice.putExtra("UserToken",function_choice.this.getIntent().getStringExtra("UserToken"));
             startActivity(intentChoice);
         }
     }
@@ -61,9 +62,7 @@ class Myhandler extends Handler{
                      public void run() {
                          OkhttpGet.UseGetString(okHttpClient,"http://192.168.0.118/BijinTemp/index.php/api/bijin/setup?user_token=4cc2dd5dd4d3e24738606d97aac890b0&count=10","X-BijinScience",
                                  "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl",body,myhandler,1);
-                         Message message=new Message();
-                         message.arg1=1;
-                         myhandler.sendMessage(message);
+
 
                      }
                  }).start();

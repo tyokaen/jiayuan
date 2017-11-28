@@ -12,31 +12,26 @@
     />
 <item
     android:id="@+id/item3"
-    android:title="人気ランキング"
+    android:title="世論シンクロ率"
     android:icon="@drawable/menuranking"
     />
 <item
     android:id="@+id/item4"
-    android:title="趣向レコメンド"
+    android:title="人気ランキング"
     android:icon="@drawable/menulikelist"
     />
 <item
     android:id="@+id/item5"
-    android:title="世論シンクロ率"
+    android:title="趣向レコメンド"
     android:icon="@drawable/menusynchro"
     />
 <item
     android:id="@+id/item6"
-    android:title="美人チャレンジ"
-    android:icon="@drawable/menuranking"
-    />
-<item
-    android:id="@+id/item7"
     android:title="LIKEリスト"
     android:icon="@drawable/menulikelist"
     />
 <item
-    android:id="@+id/item8"
+    android:id="@+id/item7"
     android:title="設定"
     android:icon="@drawable/menusetting"
     />

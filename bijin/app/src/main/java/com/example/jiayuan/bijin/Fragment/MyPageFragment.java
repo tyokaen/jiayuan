@@ -19,10 +19,12 @@ import android.widget.TextView;
 import com.example.jiayuan.bijin.Okhttp.OkhttpGet;
 import com.example.jiayuan.bijin.R;
 import com.example.jiayuan.bijin.Tools.StringToJson;
+import com.example.jiayuan.bijin.cache.UserTokenCache;
 import com.example.jiayuan.bijin.diy_view.AgeRankingView;
 import com.example.jiayuan.bijin.diy_view.MaleRankingView;
 import com.example.jiayuan.bijin.diy_view.MyPageView;
 import com.example.jiayuan.bijin.diy_view.MyScrollView;
+import com.example.jiayuan.bijin.diy_view.RoundProgressbar;
 import com.example.jiayuan.bijin.diy_view.WorldRankingView;
 
 import org.json.JSONArray;
@@ -51,6 +53,7 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
     ArrayList<String> ImageData=new ArrayList<String>();
     int tokenCount=0,imageCount=0;
     View myPageView;
+    RoundProgressbar progressbar=null;
     MyPageView Myview1,Myview2,Myview3;
     AgeRankingView ten_view,twnety_view,thirty_view,forty_view,fifity_view;
     MaleRankingView man_view,woman_view;
@@ -103,10 +106,10 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
             else if(msg.arg1==3){
                 String total=StringToJson.JsonToString((String)msg.obj,"total");
                 String totalMale=StringToJson.JsonToString((String)msg.obj,"man");
-                String totalFemale=StringToJson.JsonToString((String)msg.obj,"woman");
                 Tx_Total_Num.setText(StringToJson.JsonToString((String)msg.obj,"total")+"名");
                 world_man_view.setWorldTitle(ChangToPer(total,totalMale)+"%");
                 world_woman_view.setWorldTitle(String.valueOf(100-Integer.parseInt(ChangToPer(total,totalMale)))+"%");
+                progressbar.setProgress(Integer.parseInt(ChangToPer(total,totalMale)));
                 //dialog.cancel();
            }
         }
@@ -115,6 +118,7 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         myPageView=inflater.inflate(R.layout.mypage_main,null);
+        progressbar=(RoundProgressbar)myPageView.findViewById(R.id.Pro_num_value);
         Tx_best3=(TextView) myPageView.findViewById(R.id.if_likelist);
         Myview1=(MyPageView)myPageView.findViewById(R.id.sample_count);
         Tx_Sample=(TextView) Myview1.findViewById(R.id.sample_number_text);
@@ -358,7 +362,7 @@ public void getAllInfo(){
 
     public void getUserInfo(){
         RequestBody requestBody = null;
-       OkhttpGet.UseGetString(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/user?token=4cc2dd5dd4d3e24738606d97aac890b0", "X-BijinScience",
+       OkhttpGet.UseGetString(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/user?token="+ UserTokenCache.getInstance().getUserToken(getContext()), "X-BijinScience",
                 "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,myHandler,2);
     }
 
@@ -385,14 +389,16 @@ public void getAllInfo(){
             public void onFailure(Call call, IOException e) {
             }
             public void onResponse(Call call, Response response) throws IOException {
-               final byte[] b =response.body().bytes();
-                final Bitmap bitmap= BitmapFactory.decodeByteArray(b, 0, b.length);
-                MyPageFragment.this.getActivity().runOnUiThread(new Runnable() {
-                    public void run() {
-                        imageView.setImageBitmap(bitmap);
-                        imageView.clearAnimation();
-                    }
-                });
+                final byte[] b = response.body().bytes();
+                final Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+                if (MyPageFragment.this.getActivity() != null) {
+                    MyPageFragment.this.getActivity().runOnUiThread(new Runnable() {
+                        public void run() {
+                            imageView.setImageBitmap(bitmap);
+                            imageView.clearAnimation();
+                        }
+                    });
+                }
             }
         });
     }

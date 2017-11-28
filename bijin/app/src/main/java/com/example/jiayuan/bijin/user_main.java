@@ -23,6 +23,8 @@ import com.example.jiayuan.bijin.Fragment.RankListFragment;
 import com.example.jiayuan.bijin.Fragment.SampleFragment;
 import com.example.jiayuan.bijin.Fragment.SettingFragment;
 import com.example.jiayuan.bijin.Fragment.opinionFragment;
+import com.example.jiayuan.bijin.Okhttp.OkhttpGet;
+import com.example.jiayuan.bijin.cache.UserTokenCache;
 
 import org.json.JSONArray;
 
@@ -32,6 +34,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 
 public class user_main extends AppCompatActivity {
 
@@ -51,20 +54,23 @@ public class user_main extends AppCompatActivity {
     ExecutorService executorService= Executors.newSingleThreadExecutor();
     String imagetoken=null;
     ArrayList<String>bijinToken=new ArrayList<String>();
-    OkHttpClient okHttpClient=new OkHttpClient();
     JSONArray jsonArray=null;
     MyHandler myHandler=new MyHandler();
     ProgressDialog progressdialog=null;
     StringBuffer sb=new StringBuffer();
     ArrayList<Future> futureArrayList=new ArrayList<Future>();
+    OkHttpClient okHttpClient=new OkHttpClient();
+    Bundle bundle=new Bundle();
     class MyHandler extends Handler{
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if(msg.arg1==50) {
-                //getToken(arraylist);
-              // getToken(futureArrayList);
-
+            if(msg.arg1==1) {
+                imagetoken=(String)msg.obj;
+                FragmentManager fragmentManager=getSupportFragmentManager();
+                FragmentTransaction trans=fragmentManager.beginTransaction();
+                Transction(R.id.frg_root,sampleFragment,"com.example.jiayuan.bijin.Fragment.SampleFragment",trans);
+                drawerLayout.closeDrawers();
             }
         }
     }
@@ -89,9 +95,6 @@ public class user_main extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         drawerLayout.openDrawer(navigationView);
-
-        //left_menu.setAdapter(myAdapter);
-        //left_menu.setOnItemClickListener(this);
     }
     public void init(){
         drawerLayout=(DrawerLayout)findViewById(R.id.drawer);
@@ -111,27 +114,22 @@ public class user_main extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.item2:
-                        Transction(R.id.frg_root,sampleFragment,"com.example.jiayuan.bijin.Fragment.SampleFragment",trans);
-                        drawerLayout.closeDrawers();
+                       getImageToken();
                         break;
                     case R.id.item3:
-                        Transction(R.id.frg_root,modelRankFragment,"com.example.jiayuan.bijin.Fragment.ModelRankFragment",trans);
-                        drawerLayout.closeDrawers();
-                        break;
-                    case R.id.item4:
                         Transction(R.id.frg_root,opinionfragment,"com.example.jiayuan.bijin.Fragment.opinionFragment",trans);
                         drawerLayout.closeDrawers();
                         break;
-                    case R.id.item5:
-                        Transction(R.id.frg_root,beautyRankFragment,"com.example.jiayuan.bijin.Fragment.BeautyRankFragment",trans);
+                    case R.id.item4:
+                        Transction(R.id.frg_root,modelRankFragment,"com.example.jiayuan.bijin.Fragment.ModelRankFragment",trans);
                         drawerLayout.closeDrawers();
                         break;
+                    case R.id.item5:
                     case R.id.item6:
-                    case R.id.item7:
                         Transction(R.id.frg_root,rankListFragment,"com.example.jiayuan.bijin.Fragment.RankListFragment",trans);
                         drawerLayout.closeDrawers();
                         break;
-                    case R.id.item8:
+                    case R.id.item7:
                         Transction(R.id.frg_root,settingFragment,"com.example.jiayuan.bijin.Fragment.SettingFragment",trans);
                         drawerLayout.closeDrawers();
                         break;
@@ -152,6 +150,10 @@ public class user_main extends AppCompatActivity {
                    fragment=(android.support.v4.app.Fragment)clazz.newInstance();
                    transaction.replace(id,fragment);
                    transaction.commit();
+                   if(fragment instanceof SampleFragment){
+                       bundle.putString("ImageToken",imagetoken);
+                       fragment.setArguments(bundle);
+                   }
                } catch (InstantiationException e) {
                    e.printStackTrace();
                } catch (IllegalAccessException e) {
@@ -164,44 +166,20 @@ public class user_main extends AppCompatActivity {
            }
 
     }
-
-
     public void createDialog() {
         progressdialog = ProgressDialog.show(this, "提示", "正在获取");
     }
-    /*
-    public void getRankingImage() {
-        final RequestBody body = null;
-        for (int i = 10; i <= 50; i = i + 10) {
-            final int finalI = i;
-            Future future = executorService.submit(new Callable() {
-                @Override
-                public Object call() throws Exception {
-                    imagetoken = OkhttpGet.UseGet(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/general/trend?generation=" + finalI + "&count=" + 5, "X-BijinScience",
-                            "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", body);
-                    Message message=new Message();
-                    message.arg1=finalI;
-                    myHandler.sendMessage(message);
-                    return imagetoken;
-                }
-            });
-            futureArrayList.add(future);
-        }
-    }
-    public void getToken(ArrayList<Future> list){
-        for(int i=0;i<list.size();i++){
-            try {
-                jsonArray= StringToJson.getJSonArray(jsonArray,(String) list.get(i).get(),"popular_bijin");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
+    public void getImageToken(){
+        final RequestBody body=null;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkhttpGet.UseGetString(okHttpClient,"http://192.168.0.118/BijinTemp/index.php/api/bijin/setup?user_token="+ UserTokenCache.getInstance().getUserToken(user_main.this)+"&count=10","X-BijinScience",
+                        "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl",body,myHandler,1);
             }
-            StringToJson.getImageToken(bijinToken,jsonArray,"bijin_token");
-        }
+        }).start();
 
     }
-    */
 
     }
 

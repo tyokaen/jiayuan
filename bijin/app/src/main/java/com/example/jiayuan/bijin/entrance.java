@@ -44,7 +44,8 @@ class MyHandler extends Handler{
         if(msg.arg1==1) {
             dialog.cancel();
             textView.setText(result);
-            textView1.setText(ImageToken);
+            textView.setText(UserToken);
+           // textView1.setText(ImageToken);
              ShiftToImage(result,(String)msg.obj);
         }
     }
@@ -96,7 +97,6 @@ class MyHandler extends Handler{
                                 String AllResult=doGet();
                                result= StringToJson.ToJSon(AllResult).getString("result");
                                 UserToken=StringToJson.ToJSon(AllResult).getString("token");
-                                storeUserToken(UserToken);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -106,7 +106,7 @@ class MyHandler extends Handler{
                 }  catch (IOException e) {
                     e.printStackTrace();
                 }
-              OkhttpGet.UseGetString(httpClient,"http://192.168.0.118/BijinTemp/index.php/api/bijin/setup?user_token=4cc2dd5dd4d3e24738606d97aac890b0&count=10","X-BijinScience",
+              OkhttpGet.UseGetString(httpClient,"http://192.168.0.118/BijinTemp/index.php/api/bijin/setup?user_token="+UserToken+"&count=10","X-BijinScience",
                         "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl",body,myhadler,1);
             }
         }).start();

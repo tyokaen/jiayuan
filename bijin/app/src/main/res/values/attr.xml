@@ -7,4 +7,22 @@
      <attr name="pagetitle" format="string"/>
       <attr name="pagetext" format="string"/>
     </declare-styleable>
+<declare-styleable name="RoundProgressbar">
+<attr name="max" format="integer"></attr>
+<attr name="startAngle" format="integer"> </attr>
+<attr name="roundColor" format="color"></attr>
+<attr name="roundProgressColor" format="color"></attr>
+<attr name="roundWidth" format="dimension"></attr>
+<attr name="backColor" format="color"></attr>
+<attr name="textColor" format="color"></attr>
+<attr name="textSize" format="dimension"></attr>
+<attr name="textIsDisplayable" format="boolean"></attr>
+ <attr name="style">
+     <enum name="STOKE" value="0"></enum>
+     <enum name="FILL" value="1"></enum>
+</attr>
+    </declare-styleable>
+
+
+
 </resources>

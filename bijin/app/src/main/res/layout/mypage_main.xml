@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.example.jiayuan.bijin.diy_view.MyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:jia="http://schemas.android.com/apk/res-auto"
+     xmlns:android_custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/scrollView"
-    >
+    android:id="@+id/scrollView">
  <LinearLayout
      android:layout_height="match_parent"
      android:layout_width="match_parent"
@@ -148,9 +148,28 @@
                  />
             </LinearLayout>
          <LinearLayout
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:orientation="horizontal"
+             >
+             <com.example.jiayuan.bijin.diy_view.RoundProgressbar
+                 android:layout_height="60dp"
+                 android:layout_width="60dp"
+                 android:id="@+id/Pro_num_value"
+                 android_custom:startAngle="-90"
+                 android_custom:roundColor="#D1D1D1"
+                 android_custom:roundProgressColor="@android:color/holo_blue_dark"
+                 android_custom:textColor="#9A32CD"
+                 android_custom:textIsDisplayable="false"
+                 android_custom:roundWidth="10dip"
+                 android_custom:textSize="18sp"
+                 android:layout_weight="1"
+                 />
+         <LinearLayout
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:orientation="vertical"
+             android:layout_weight="1"
              >
            <com.example.jiayuan.bijin.diy_view.WorldRankingView
              android:layout_height="wrap_content"
@@ -164,6 +183,7 @@
                  android:layout_weight="1"
                  android:id="@+id/world_woman"
                  />
+             </LinearLayout>
              </LinearLayout>
          </LinearLayout>
             <LinearLayout

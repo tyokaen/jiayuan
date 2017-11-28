@@ -42,7 +42,6 @@ public class Image_Choice extends AppCompatActivity implements View.OnClickListe
     int number_left = 0;
     OkHttpClient okHttpClient = new OkHttpClient();
     String result = "jiyuan", ImageToken = null, userToken = null;
-    TextView textView = null;
     ProgressDialog progressDialog = null;
     JSONArray jsonArray = null;
     byte[] b = new byte[10000];
@@ -125,7 +124,6 @@ public class Image_Choice extends AppCompatActivity implements View.OnClickListe
                                 public void run() {
                                     try {
                                         send_Image(jsonArray.getJSONObject(index).getString("token"),0);
-                                        getImage(0);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -155,7 +153,6 @@ public class Image_Choice extends AppCompatActivity implements View.OnClickListe
                                 public void run() {
                                     try {
                                         send_Image(jsonArray.getJSONObject(index).getString("token"),1);
-                                        getImage(1);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -186,7 +183,7 @@ public class Image_Choice extends AppCompatActivity implements View.OnClickListe
         if (i == 1)
             vote="upper";
         else vote = "lower";
-              RequestBody  requestBody = RequestBody.create(type,"user_token=4cc2dd5dd4d3e24738606d97aac890b0"+"&bijin_token="+ImageToken+"&vote="+vote);
+              RequestBody  requestBody = RequestBody.create(type,"user_token="+userToken+"&bijin_token="+ImgToken+"&vote="+vote);
                 result = OkhttpGet.UsePost(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/vote","X-BijinScience",
                         "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody);
 }
