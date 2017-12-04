@@ -47,12 +47,12 @@
         <item>沖縄県</item>
     </string-array>
 <string-array name="age">
-    <item>10代</item>
-    <item>20代</item>
-    <item>30代</item>
-    <item>40代</item>
-    <item>50代</item>
-    <item>60代</item>
+    <item>10</item>
+    <item>20</item>
+    <item>30</item>
+    <item>40</item>
+    <item>50</item>
+    <item>60</item>
 </string-array>
     <string-array name="sex">
         <item>男性</item>

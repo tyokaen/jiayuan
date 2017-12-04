@@ -3,7 +3,6 @@ package com.example.jiayuan.bijin.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,11 +18,11 @@ import android.widget.TextView;
 import com.example.jiayuan.bijin.Okhttp.OkhttpGet;
 import com.example.jiayuan.bijin.R;
 import com.example.jiayuan.bijin.Tools.StringToJson;
+import com.example.jiayuan.bijin.Tools.ToolsBitmap;
 import com.example.jiayuan.bijin.cache.UserTokenCache;
 import com.example.jiayuan.bijin.diy_view.AgeRankingView;
 import com.example.jiayuan.bijin.diy_view.MaleRankingView;
 import com.example.jiayuan.bijin.diy_view.MyPageView;
-import com.example.jiayuan.bijin.diy_view.MyScrollView;
 import com.example.jiayuan.bijin.diy_view.RoundProgressbar;
 import com.example.jiayuan.bijin.diy_view.WorldRankingView;
 
@@ -77,12 +76,12 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
     ArrayList<String> bijinToken=new ArrayList<String>();
     ArrayList<byte[]> bytes=new ArrayList<byte[]>();
     Bitmap bitmap=null;
-    MyScrollView scrollview=null;
     ProgressDialog dialog=null;
    Animation anim;
     String userInfo;
     String usernumber;
     String text=null;
+    Call call=null;
     @Override
     public void onClick(View v) {
         int index=imageViewArrayList.indexOf((ImageView)v);
@@ -128,7 +127,6 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
         Tx_user_name=(TextView)myPageView.findViewById(R.id.user_screen_name);
         Tx_user_birth=(TextView) myPageView.findViewById(R.id.user_birth);
         Tx_Total_Num=(TextView)myPageView.findViewById(R.id.user_total);
-        scrollview=(MyScrollView) myPageView.findViewById(R.id.scrollView);
         textView1=(TextView)myPageView.findViewById(R.id.testResult2);
         anim= AnimationUtils.loadAnimation(getContext(), R.anim.loading_dialog);
        initAgeRanking();
@@ -347,7 +345,6 @@ public void getAllInfo(){
 获取图片
  */
     public void getImage(){
-
         getToken(futureArrayList);
         while (tokenCount < 31) {
             RequestBody requestBody = null;
@@ -379,18 +376,18 @@ public void getAllInfo(){
     /*
     异步加载图片
      */
-    public void  UseGetImage1(OkHttpClient okHttpClient, String url, String headerKey, String headerVal, RequestBody body, final ImageView imageView){
+    public void  UseGetImage1(final OkHttpClient okHttpClient, String url, String headerKey, String headerVal, RequestBody body, final ImageView imageView){
         Request request = new Request.Builder().url(url)
                 .header(headerKey,headerVal)
                 .method("GET", body)
                 .build();
-        Call call=okHttpClient.newCall(request);
+        call=getCall(request);
         call.enqueue(new Callback() {
             public void onFailure(Call call, IOException e) {
             }
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(final Call call, Response response) throws IOException {
                 final byte[] b = response.body().bytes();
-                final Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+                final Bitmap bitmap = ToolsBitmap.getInstance().getScaledBitmap(b);
                 if (MyPageFragment.this.getActivity() != null) {
                     MyPageFragment.this.getActivity().runOnUiThread(new Runnable() {
                         public void run() {
@@ -401,5 +398,14 @@ public void getAllInfo(){
                 }
             }
         });
+    }
+    public Call getCall(Request request){
+        return okHttpClient.newCall(request);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        call.cancel();
     }
 }

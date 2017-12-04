@@ -11,4 +11,6 @@
     <color name="goastwhite">#F8F8FF</color>
     <color name="blue">#0000FF</color>
     <color name="red">#FF8888</color>
+    <color name="specialblue">#00BBFF</color>
+    <color name="unclickColor">#008888</color>
 </resources>

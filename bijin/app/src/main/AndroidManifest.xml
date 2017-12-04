@@ -30,7 +30,8 @@
             android:name=".entrance"
             android:label="@string/title_activity_splash_screen"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Fragment.bijin_detail"></activity>
+        <activity android:name=".Fragment.bijin_detail" />
+        <activity android:name=".Fragment.bijin_best_detail"></activity>
     </application>
 
 </manifest>

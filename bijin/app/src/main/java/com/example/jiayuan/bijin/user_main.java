@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import com.example.jiayuan.bijin.Fragment.BeautyRankFragment;
 import com.example.jiayuan.bijin.Fragment.ModelRankFragment;
 import com.example.jiayuan.bijin.Fragment.RankListFragment;
 import com.example.jiayuan.bijin.Fragment.SampleFragment;
@@ -29,8 +28,6 @@ import com.example.jiayuan.bijin.cache.UserTokenCache;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import okhttp3.OkHttpClient;
@@ -47,14 +44,13 @@ public class user_main extends AppCompatActivity {
   SampleFragment sampleFragment=null;
     ModelRankFragment modelRankFragment=null;
     RankListFragment rankListFragment=null;
-    BeautyRankFragment beautyRankFragment=null;
     opinionFragment opinionfragment=null;
    android.support.v4.app.Fragment myPageFragment=null;
     android.support.v4.app.FragmentManager fragmentManger;
-    ExecutorService executorService= Executors.newSingleThreadExecutor();
     String imagetoken=null;
+    String likelist=null,best1_name,best2_name,best3_name;
     ArrayList<String>bijinToken=new ArrayList<String>();
-    JSONArray jsonArray=null;
+    JSONArray jsonArray=new JSONArray();
     MyHandler myHandler=new MyHandler();
     ProgressDialog progressdialog=null;
     StringBuffer sb=new StringBuffer();
@@ -72,6 +68,14 @@ public class user_main extends AppCompatActivity {
                 Transction(R.id.frg_root,sampleFragment,"com.example.jiayuan.bijin.Fragment.SampleFragment",trans);
                 drawerLayout.closeDrawers();
             }
+            else if(msg.arg1==2){
+                likelist=(String)msg.obj;
+                FragmentManager fragmentManager=getSupportFragmentManager();
+                FragmentTransaction trans=fragmentManager.beginTransaction();
+                Transction(R.id.frg_root,rankListFragment,"com.example.jiayuan.bijin.Fragment.RankListFragment",trans);
+                drawerLayout.closeDrawers();
+            }
+
         }
     }
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,12 +125,11 @@ public class user_main extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.item4:
-                        Transction(R.id.frg_root,modelRankFragment,"com.example.jiayuan.bijin.Fragment.ModelRankFragment",trans);
-                        drawerLayout.closeDrawers();
+                        getLikeListToken();
                         break;
                     case R.id.item5:
                     case R.id.item6:
-                        Transction(R.id.frg_root,rankListFragment,"com.example.jiayuan.bijin.Fragment.RankListFragment",trans);
+                        Transction(R.id.frg_root,modelRankFragment,"com.example.jiayuan.bijin.Fragment.ModelRankFragment",trans);
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.item7:
@@ -154,6 +157,10 @@ public class user_main extends AppCompatActivity {
                        bundle.putString("ImageToken",imagetoken);
                        fragment.setArguments(bundle);
                    }
+                   else if(fragment instanceof RankListFragment){
+                       bundle.putString("bijinlist",likelist);
+                       fragment.setArguments(bundle);
+                   }
                } catch (InstantiationException e) {
                    e.printStackTrace();
                } catch (IllegalAccessException e) {
@@ -178,7 +185,16 @@ public class user_main extends AppCompatActivity {
                         "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl",body,myHandler,1);
             }
         }).start();
-
+    }
+    public void getLikeListToken(){
+        final RequestBody body=null;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkhttpGet.UseGetString(okHttpClient,"http://192.168.0.118/BijinTemp/index.php/api/vote?user_token="+UserTokenCache.getInstance().getUserToken(user_main.this)+"&vote=upper","X-BijinScience",
+                        "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl",body,myHandler,2);
+            }
+        }).start();
     }
 
     }

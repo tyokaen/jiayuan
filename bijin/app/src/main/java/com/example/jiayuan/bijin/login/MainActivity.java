@@ -1,7 +1,6 @@
 package com.example.jiayuan.bijin.login;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -76,7 +75,7 @@ ExecutorService executorService= Executors.newCachedThreadPool();
             public void afterTextChanged(Editable s) {
                 if (s.length() > 0 && Ed_pwd.getText().length() > 0) {
                     Btn_login.setClickable(true);
-                    Btn_login.setBackgroundColor(Color.parseColor("#FF8C00"));
+                    Btn_login.setBackground(getResources().getDrawable(R.drawable.to_login_button));
                 }
             }
         };
@@ -109,6 +108,8 @@ public void init(){
                 login_success(Ed_id.getText().toString(),Ed_pwd.getText().toString());
                 //login_success(Ed_id.getText().toString(),Ed_pwd.getText().toString());
             //getRankingImage();
+               // Intent intent=new Intent(MainActivity.this,user_main.class);
+              //  startActivity(intent);
         }
     }
     public  void ShiftToMain(boolean flag){

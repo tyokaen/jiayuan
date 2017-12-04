@@ -24,7 +24,7 @@
     android:layout_marginTop="100dp"
     />
     <Button
-        android:id="@+id/image_choice_page"
+        android:id="@+id/login_page"
         android:layout_height="wrap_content"
         android:layout_width="200dp"
         android:text="ログイン"
@@ -45,7 +45,7 @@
 
    />
     <Button
-        android:id="@+id/login_page"
+        android:id="@+id/image_choice_page"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="ゲスト"

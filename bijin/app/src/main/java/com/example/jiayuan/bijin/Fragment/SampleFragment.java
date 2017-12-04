@@ -130,7 +130,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                    case R.id.sample_like:
                        if (index < getArrayLength(bijinToken)) {
                            try {
-                               send_Image(index,0);
+                               send_Image(index,1);
                            } catch (JSONException e) {
                                e.printStackTrace();
                            }
@@ -151,6 +151,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
         @Override
         public View makeView() {
                 ImageView imageView=new ImageView(getActivity());
+
                         return imageView;
         }
     public int getArrayLength(String target) {

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/main_root"
     android:fitsSystemWindows="true"
-    android:background="@drawable/synchrobackground"
+    android:background="@drawable/splashlogin"
     tools:context="com.example.jiayuan.bijin.login.MainActivity">
 <LinearLayout
     android:layout_width="match_parent"
@@ -53,7 +53,7 @@
          android:layout_height="wrap_content"
          android:layout_width="200dp"
          android:clickable="false"
-         style="@style/LoginButton"
+         android:background="@drawable/button_unclickable"
          android:layout_marginTop="15dp"
          android:text="@string/login"
          android:layout_gravity="center_horizontal"

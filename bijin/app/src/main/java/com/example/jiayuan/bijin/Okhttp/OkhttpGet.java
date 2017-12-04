@@ -1,7 +1,5 @@
 package com.example.jiayuan.bijin.Okhttp;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 
@@ -92,23 +90,6 @@ public  static  void UseGetString(OkHttpClient okHttpClient, String url, String 
     /*
   获取图片并显示到imageview上
      */
-    public static void  UseGetImage1(OkHttpClient okHttpClient, String url, String headerKey, String headerVal, RequestBody body, final Handler handler,Bitmap bitmap){
-        Request request = new Request.Builder().url(url)
-                .header(headerKey,headerVal)
-                .method("GET", body)
-                .build();
-        Call call=okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            public void onFailure(Call call, IOException e) {
-            }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                     byte[] b =response.body().bytes();
-                Bitmap bitmap= BitmapFactory.decodeByteArray(b, 0, b.length);
-
-            }
-        });
-        }
     public static String UsePost(OkHttpClient okHttpClient, String url, String headerKey, String headerVal, RequestBody requestBody)  {
         Request request=new Request.Builder().url(url)
                 .addHeader(headerKey,headerVal)
@@ -122,7 +103,6 @@ public  static  void UseGetString(OkHttpClient okHttpClient, String url, String 
             e.printStackTrace();
         }
             return ""+response.isSuccessful();
-
 
     }
 

@@ -6,48 +6,44 @@
     >
 <ImageView
     android:id="@+id/age_image"
-    android:layout_width="20dp"
+    android:layout_width="0dp"
+    android:layout_height="50dip"
     android:layout_weight="1"
-    android:layout_height="20dp"
     />
 <ImageView
-    android:layout_height="55dp"
-    android:layout_width="40dp"
-    android:layout_weight="1"
+    android:layout_height="50dip"
+    android:layout_width="0dp"
     android:id="@+id/age_rangking1"
-    android:scaleType="fitXY"
     android:src="@drawable/load"
-    />
-    <ImageView
-    android:layout_height="55dp"
-    android:layout_width="40dp"
     android:layout_weight="1"
-    android:id="@+id/age_rangking2"
-        android:scaleType="fitXY"
-        android:src="@drawable/load"
     />
+
     <ImageView
-    android:layout_height="55dp"
-    android:layout_width="40dp"
-    android:layout_weight="1"
-    android:id="@+id/age_rangking3"
-        android:scaleType="fitXY"
-        android:src="@drawable/load"
-    />
-    <ImageView
-    android:layout_height="55dp"
-    android:layout_width="40dp"
-    android:layout_weight="1"
-    android:id="@+id/age_rangking4"
-        android:scaleType="fitXY"
-        android:src="@drawable/load"
-    />
-    <ImageView
-        android:layout_height="55dp"
-        android:layout_width="40dp"
+        android:id="@+id/age_rangking2"
+        android:layout_width="0dip"
+        android:layout_height="50dip"
         android:layout_weight="1"
-        android:id="@+id/age_rangking5"
-        android:scaleType="fitXY"
+        android:src="@drawable/load" />
+
+    <ImageView
+    android:layout_height="50dip"
+    android:layout_width="0dp"
+    android:id="@+id/age_rangking3"
         android:src="@drawable/load"
+        android:layout_weight="1"
+    />
+    <ImageView
+    android:layout_height="50dip"
+    android:layout_width="0dip"
+    android:id="@+id/age_rangking4"
+        android:src="@drawable/load"
+        android:layout_weight="1"
+    />
+    <ImageView
+        android:layout_height="50dip"
+        android:layout_width="0dip"
+        android:id="@+id/age_rangking5"
+        android:src="@drawable/load"
+        android:layout_weight="1"
         />
 </LinearLayout>
