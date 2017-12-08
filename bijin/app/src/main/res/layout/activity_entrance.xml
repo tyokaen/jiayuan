@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/synchrobackground"
     android:orientation="vertical"
-    tools:context="com.example.jiayuan.bijin.entrance">
+    tools:context="com.example.jiayuan.bijin.Activity.entrance">
 
  <ImageView
      android:layout_width="wrap_content"

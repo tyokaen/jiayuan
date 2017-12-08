@@ -108,7 +108,6 @@
             android_custom:roundWidth="30dip"
             android_custom:textSize="18sp"
             android:layout_gravity="center_vertical"
-
             />
     </LinearLayout>
     <LinearLayout
@@ -139,5 +138,6 @@
             android:layout_gravity="center_vertical"
             />
    </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

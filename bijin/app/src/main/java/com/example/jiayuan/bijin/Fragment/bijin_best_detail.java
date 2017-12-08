@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.jiayuan.bijin.Okhttp.OkhttpGet;
 import com.example.jiayuan.bijin.R;
 import com.example.jiayuan.bijin.Tools.StringToJson;
-import com.example.jiayuan.bijin.user_main;
+import com.example.jiayuan.bijin.Activity.user_main;
 
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;

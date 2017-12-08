@@ -30,6 +30,6 @@ public class MaleRankingView extends LinearLayout {
     }
     public void setMaleTitle(String string){
         male_title.setText(string);
-        male_title.setTextColor(getResources().getColor(R.color.blue));
+        male_title.setTextColor(getResources().getColor(R.color.specialblue));
     }
 }

@@ -11,22 +11,20 @@
      android:layout_width="match_parent"
      android:orientation="vertical"
      >
- <LinearLayout
+ <FrameLayout
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:orientation="horizontal"
+     android:background="@color/specialblue"
+     android:layout_marginTop="10dp"
      >
-  <com.example.jiayuan.bijin.diy_view.CircleImageView
-      android:src="@drawable/a12"
-      android:layout_height="100dp"
-      android:layout_width="100dp"
-      android:scaleType="fitCenter"
-      android:layout_marginLeft="20dp"
-      />
+
    <LinearLayout
-       android:layout_height="wrap_content"
-       android:layout_width="wrap_content"
+       android:layout_height="100dp"
+       android:layout_width="320dp"
        android:orientation="vertical"
+       android:background="@drawable/background_linear"
+       android:layout_marginLeft="60dp"
        >
 
    <TextView
@@ -35,6 +33,7 @@
        android:textSize="15dp"
        android:layout_weight="1"
        android:text="研究員No.4307"
+       android:layout_marginLeft="100dp"
        />
        <TextView
            android:layout_height="wrap_content"
@@ -43,6 +42,7 @@
            android:layout_weight="1"
            android:textColor="@color/black"
            android:id="@+id/user_screen_name"
+           android:layout_marginLeft="100dp"
            />
        <TextView
            android:layout_height="wrap_content"
@@ -50,17 +50,26 @@
            android:textSize="15dp"
            android:layout_weight="1"
            android:id="@+id/user_birth"
+           android:layout_marginLeft="100dp"
            />
    </LinearLayout>
- </LinearLayout>
+
+     <com.example.jiayuan.bijin.diy_view.CircleImageView
+         android:id="@+id/circleImageView"
+         android:layout_width="100dp"
+         android:layout_height="100dp"
+         android:layout_marginLeft="10dp"
+         android:scaleType="fitCenter"
+         android:src="@drawable/a12" />
+ </FrameLayout>
 <LinearLayout
-    android:layout_height="200dp"
+    android:layout_height="150dp"
     android:layout_width="match_parent"
     android:orientation="horizontal"
     >
 <com.example.jiayuan.bijin.diy_view.MyPageView
-    android:layout_width="250dp"
-    android:layout_height="200dp"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
     jia:pagetitle="サンプル入力数"
     android:id="@+id/sample_count"
     android:layout_weight="1"
@@ -71,8 +80,8 @@
     android:layout_width="wrap_content"
     />
     <com.example.jiayuan.bijin.diy_view.MyPageView
-        android:layout_width="250dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         jia:pagetitle="世論シンクロ率"
         android:id="@+id/opinion_count"
         android:layout_weight="1"
@@ -80,7 +89,7 @@
     </LinearLayout>
  <LinearLayout
      android:layout_width="match_parent"
-     android:layout_height="30dp"
+     android:layout_height="wrap_content"
      android:orientation="horizontal"
      >
  <ImageView
@@ -116,10 +125,10 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:orientation="vertical"
-             android:layout_weight="1"
+
              >
            <LinearLayout
-               android:layout_width="400dp"
+               android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:orientation="horizontal"
                >
@@ -133,7 +142,7 @@
                android:layout_height="wrap_content"
                android:text="研究員総数"
                android:textSize="20dp"
-               android:textColor="@color/blue"
+               android:textColor="@color/specialblue"
                android:layout_marginLeft="10dp"
                />
                </LinearLayout>
@@ -147,45 +156,48 @@
                  android:layout_marginLeft="30dp"
                  />
             </LinearLayout>
+
          <LinearLayout
-             android:layout_height="wrap_content"
              android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
              android:orientation="horizontal"
+             android:layout_marginLeft="100dp"
              >
+
              <com.example.jiayuan.bijin.diy_view.RoundProgressbar
-                 android:layout_height="60dp"
-                 android:layout_width="60dp"
                  android:id="@+id/Pro_num_value"
-                 android_custom:startAngle="-90"
+                 android:layout_width="60dp"
+                 android:layout_height="60dp"
+                 android:layout_weight="1"
                  android_custom:roundColor="#D1D1D1"
                  android_custom:roundProgressColor="@android:color/holo_blue_dark"
+                 android_custom:roundWidth="10dip"
+                 android_custom:startAngle="-90"
                  android_custom:textColor="#9A32CD"
                  android_custom:textIsDisplayable="false"
-                 android_custom:roundWidth="10dip"
-                 android_custom:textSize="18sp"
-                 android:layout_weight="1"
-                 />
-         <LinearLayout
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:orientation="vertical"
-             android:layout_weight="1"
-             >
-           <com.example.jiayuan.bijin.diy_view.WorldRankingView
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:layout_weight="1"
-             android:id="@+id/world_man"
-             />
-             <com.example.jiayuan.bijin.diy_view.WorldRankingView
-                 android:layout_height="wrap_content"
+                 android_custom:textSize="18sp" />
+
+             <LinearLayout
                  android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
                  android:layout_weight="1"
-                 android:id="@+id/world_woman"
-                 />
-             </LinearLayout>
+                 android:orientation="vertical"
+                 android:layout_marginLeft="20dp">
+
+                 <com.example.jiayuan.bijin.diy_view.WorldRankingView
+                     android:id="@+id/world_man"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1" />
+
+                 <com.example.jiayuan.bijin.diy_view.WorldRankingView
+                     android:id="@+id/world_woman"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1" />
              </LinearLayout>
          </LinearLayout>
+     </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -220,7 +232,7 @@
                   android:layout_height="wrap_content"
                   android:layout_width="wrap_content"
                   android:text="人気傾向に近い芸能人・有名人"
-                  android:textColor="@color/blue"
+                  android:textColor="@color/specialblue"
                   />
               </LinearLayout>
             <LinearLayout
@@ -234,6 +246,8 @@
                     android:layout_width="wrap_content"
                     android:text="1. 石原さとみ"
                     android:textSize="15dp"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/black"
                     />
                 <TextView
                     android:layout_height="wrap_content"
@@ -241,6 +255,8 @@
                     android:text="2. 新垣結衣 "
                     android:textSize="15dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/black"
                     />
                 <TextView
                     android:layout_height="wrap_content"
@@ -248,6 +264,8 @@
                     android:text="3. 佐々木"
                     android:textSize="15dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/black"
                     />
             </LinearLayout>
      <LinearLayout
@@ -265,7 +283,7 @@
              android:layout_height="wrap_content"
              android:layout_width="wrap_content"
              android:text="年代別人気"
-             android:textColor="@color/blue"
+             android:textColor="@color/specialblue"
              />
      </LinearLayout>
  <com.example.jiayuan.bijin.diy_view.AgeRankingView
@@ -297,31 +315,6 @@
          android:layout_height="wrap_content"
          android:id="@+id/age_fifty"
          android:layout_marginTop="30dp"
-         />
-     <TextView
-         android:id="@+id/testResult"
-         android:layout_height="wrap_content"
-         android:layout_width="wrap_content"
-         />
-     <TextView
-         android:id="@+id/testResult2"
-         android:layout_height="wrap_content"
-         android:layout_width="wrap_content"
-         />
-     <TextView
-         android:id="@+id/testResult3"
-         android:layout_height="wrap_content"
-         android:layout_width="wrap_content"
-         />
-     <TextView
-         android:id="@+id/testResult4"
-         android:layout_height="wrap_content"
-         android:layout_width="wrap_content"
-         />
-     <TextView
-         android:id="@+id/testResult5"
-         android:layout_height="wrap_content"
-         android:layout_width="wrap_content"
          />
             </LinearLayout>
 

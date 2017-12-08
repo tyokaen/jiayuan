@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/main"
     android:orientation="vertical"
-    tools:context="com.example.jiayuan.bijin.function_choice">
+    tools:context="com.example.jiayuan.bijin.Activity.function_choice">
 <TextView
     android:text="実験は完了しました。"
     android:layout_height="wrap_content"

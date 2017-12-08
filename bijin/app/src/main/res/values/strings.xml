@@ -27,4 +27,5 @@
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="title_hotranking">人気ランキングとは、全ユーザからの美人評価データを元に、「どの地域で」「男性と女性で」「どの年代に」は「どんな人が人気なのか？」ということをランキングで判定します。美人は時代と共に変遷します。今日の人気美人はどうなっているでしょうか？そんな疑問に答える人気ランキングを見てみましょう
 </string>
+    <string name="title_activity_pre_recommend">Pre_recommend</string>
 </resources>

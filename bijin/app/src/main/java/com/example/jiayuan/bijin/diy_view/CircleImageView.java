@@ -8,13 +8,12 @@ import android.graphics.Paint;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 /**
  * Created by jiayuan on 2017/07/28.
  */
 
-public class CircleImageView extends ImageView {
+public class CircleImageView extends android.support.v7.widget.AppCompatImageView {
     private int mWidth;
     private int mHeight;
     public CircleImageView(Context context){
@@ -37,7 +36,7 @@ public class CircleImageView extends ImageView {
         Paint paint=new Paint();
         paint.setShader(shader);
         // RectF rectF=new RectF(0,0,mWidth,mHeight );
-        canvas.drawCircle(mWidth/2,mHeight/2,mWidth/3,paint);
+        canvas.drawCircle(mWidth/2,mHeight/2,mWidth/2,paint);
     }
     private Bitmap getBitMapFromDrawable(Drawable drawable){
         Bitmap bitmap=Bitmap.createBitmap(drawable.getIntrinsicWidth(),drawable.getMinimumHeight(), Bitmap.Config.ARGB_8888);

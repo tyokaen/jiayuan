@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/item_1">
 <item
     android:id="@+id/item1"
     android:title="マイページ"
@@ -10,6 +11,8 @@
     android:title="サンプル入力"
     android:icon="@drawable/menuinput"
     />
+    </group>
+    <group android:id="@+id/item_3">
 <item
     android:id="@+id/item3"
     android:title="世論シンクロ率"
@@ -17,22 +20,28 @@
     />
 <item
     android:id="@+id/item4"
-    android:title="人気ランキング"
+    android:title="LIKEリスト"
     android:icon="@drawable/menulikelist"
     />
+    </group>
+    <group android:id="@+id/item_5">
 <item
     android:id="@+id/item5"
-    android:title="趣向レコメンド"
+    android:title="人気ランキング"
     android:icon="@drawable/menusynchro"
     />
 <item
     android:id="@+id/item6"
-    android:title="LIKEリスト"
+    android:title="趣向レコメンド"
     android:icon="@drawable/menulikelist"
     />
-<item
-    android:id="@+id/item7"
-    android:title="設定"
-    android:icon="@drawable/menusetting"
-    />
+    </group>
+    <group android:id="@+id/item_7">
+        <item
+          android:id="@+id/item7"
+          android:title="設定"
+          android:icon="@drawable/menusetting"
+            />
+
+    </group>
 </menu>

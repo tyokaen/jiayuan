@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.jiayuan.bijin.Okhttp.OkhttpGet;
 import com.example.jiayuan.bijin.R;
 import com.example.jiayuan.bijin.Tools.StringToJson;
+import com.example.jiayuan.bijin.diy_view.BigRoundProgressbar;
 import com.example.jiayuan.bijin.diy_view.RoundProgressbar;
 import com.example.jiayuan.bijin.diy_view.SyncroShowView;
 
@@ -30,6 +31,7 @@ TextView Tx_syn_title1,Tx_syn_value1,
             Tx_syn_title3,Tx_syn_value3,
     Tx_syn_title4,Tx_syn_value4;
 RoundProgressbar R_syn_value1, R_syn_value2, R_syn_value3, R_syn_value4;
+BigRoundProgressbar big_R_syncro_value=null;
 OkHttpClient okHttpClient=new OkHttpClient();
     TextView textView=null;
     View view;
@@ -43,12 +45,13 @@ class MyHandler extends Handler{
         }
         else if(msg.arg1==2){
               Tx_syn_title2.setText(StringToJson.JsonToString((String)msg.obj,"label"));
-              R_syn_value2.setProgress(changeDouble(StringToJson.JsonToString((String)msg.obj,"synchro")));
+            R_syn_value2.setProgress(changeDouble(StringToJson.JsonToString((String)msg.obj,"synchro")));
 
         }
             else if(msg.arg1==3){
             Tx_syn_title3.setText(StringToJson.JsonToString((String)msg.obj,"label"));
             R_syn_value3.setProgress(changeDouble(StringToJson.JsonToString((String)msg.obj,"synchro")));
+
         }
         else if(msg.arg1==4){
             Tx_syn_title4.setText(StringToJson.JsonToString((String)msg.obj,"label"));
@@ -65,7 +68,6 @@ class MyHandler extends Handler{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.public_opinion,null);
-        textView=(TextView)view.findViewById(R.id.text);
         initView();
         getResult();
         return view;
@@ -78,6 +80,7 @@ class MyHandler extends Handler{
         R_syn_value3=(RoundProgressbar)view.findViewById(R.id.R_syncro_local);
         Tx_syn_title4=(TextView)view.findViewById(R.id.syncro_sex_title);
         R_syn_value4=(RoundProgressbar)view.findViewById(R.id.R_syncro_sex);
+        //big_R_syncro_value=(BigRoundProgressbar)view.findViewById(R.id.R_syncro_total);
         //Tx_syn_title=(TextView)
     }
     public void getResult(){

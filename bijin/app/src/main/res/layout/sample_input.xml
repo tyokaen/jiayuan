@@ -51,7 +51,7 @@
 <ImageSwitcher
     android:id="@+id/Gallery1"
     android:layout_width="200dp"
-    android:layout_height="150dp"
+    android:layout_height="200dp"
     android:layout_marginTop="50dp"
     android:layout_gravity="center"
     />

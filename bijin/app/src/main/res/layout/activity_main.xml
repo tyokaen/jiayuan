@@ -7,7 +7,7 @@
     android:id="@+id/main_root"
     android:fitsSystemWindows="true"
     android:background="@drawable/splashlogin"
-    tools:context="com.example.jiayuan.bijin.login.MainActivity">
+    tools:context="com.example.jiayuan.bijin.Activity.MainActivity">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
     />
  <TextView
      android:text="ユーザーログイン"
-     android:textSize="20dp"
+     android:textSize="15dp"
      android:textColor="@color/white"
      android:layout_gravity="center_horizontal"
      android:layout_width="wrap_content"
@@ -69,30 +69,36 @@
         android:layout_marginTop="40dp"
         android:id="@+id/forget_pwd"
         />
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/te1"
+    <View
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_marginTop="70dp"
+        android:layout_gravity="center_horizontal"
         />
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/te2"
+    <Button
+        android:layout_height="20dp"
+        android:layout_width="match_parent"
+        android:background="@null"
+        android:text="プライバシーポリシー"
+        android:textSize="10dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
         />
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/te3"
+    <View
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center_horizontal"
         />
-    <TextView
+    <ImageView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:id="@+id/te4"
-        />
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/te5"
+        android:src="@drawable/bijincompany"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
         />
     </LinearLayout>
 </ScrollView>

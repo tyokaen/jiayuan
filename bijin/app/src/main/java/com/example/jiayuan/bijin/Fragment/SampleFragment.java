@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
@@ -23,7 +24,7 @@ import com.example.jiayuan.bijin.Okhttp.OkhttpGet;
 import com.example.jiayuan.bijin.R;
 import com.example.jiayuan.bijin.Tools.StringToJson;
 import com.example.jiayuan.bijin.cache.UserTokenCache;
-import com.example.jiayuan.bijin.user_main;
+import com.example.jiayuan.bijin.Activity.user_main;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,12 +68,14 @@ public class SampleFragment extends android.support.v4.app.Fragment implements V
             if(msg.arg1==1) {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes.get(count), 0, bytes.get(count).length);
                 imageSwitcher.setImageDrawable(new BitmapDrawable(bitmap));
-
             }
             else if(msg.arg1==2){
                 count++;
                 if(count<10) {
+                    imageSwitcher.setInAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.left_in));
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes.get(count), 0, bytes.get(count).length);
+                    if(bitmap==null)
+                        imageSwitcher.setImageResource(R.drawable.defaultuserimage);
                     imageSwitcher.setImageDrawable(new BitmapDrawable(bitmap));
                 }
                 if(count==10){
@@ -151,7 +154,8 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
         @Override
         public View makeView() {
                 ImageView imageView=new ImageView(getActivity());
-
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                imageView.setLayoutParams(new ImageSwitcher.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                         return imageView;
         }
     public int getArrayLength(String target) {

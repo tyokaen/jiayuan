@@ -63,7 +63,7 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
             imageView14,imageView15,imageView16,imageView17,imageView18,imageView19,imageView20,
             imageView21,imageView22,imageView23,imageView24,imageView25,imageView26,imageView27,
     imageView28,imageView29,imageView30,imageView31;
-    TextView Tx_user_name,Tx_user_level,Tx_user_birth,Tx_Total_Num,Tx_Sample,Tx_best3;
+    TextView Tx_user_name,Tx_user_level,Tx_user_birth,Tx_Total_Num,Tx_Sample,Tx_best3,Tx_syncro;
     OkHttpClient okHttpClient=new OkHttpClient();
     ArrayList<ImageView> imageViewArrayList=new ArrayList<ImageView>();
     StringBuffer stringBuffer=new StringBuffer();
@@ -97,6 +97,7 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
                 Tx_user_name.setText(StringToJson.JsonToString((String)msg.obj,"nickname"));
                 Tx_user_birth.setText("生年月日" +StringToJson.JsonToString((String)msg.obj,"date_of_birth"));
                 Tx_Sample.setText(StringToJson.JsonToString((String)msg.obj,"sorting")+"回");
+                Tx_syncro.setText(StringToJson.JsonToString((String)msg.obj,"synchro")+"%");
                 if(StringToJson.JsonToString((String)msg.obj,"is_best3_configured").equals("true"))
                 Tx_best3.setText("ベスト3設定完了しました");
                 else
@@ -127,7 +128,8 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
         Tx_user_name=(TextView)myPageView.findViewById(R.id.user_screen_name);
         Tx_user_birth=(TextView) myPageView.findViewById(R.id.user_birth);
         Tx_Total_Num=(TextView)myPageView.findViewById(R.id.user_total);
-        textView1=(TextView)myPageView.findViewById(R.id.testResult2);
+        Tx_syncro=(TextView)Myview2.findViewById(R.id.sample_number_text);
+       // textView1=(TextView)myPageView.findViewById(R.id.testResult2);
         anim= AnimationUtils.loadAnimation(getContext(), R.anim.loading_dialog);
        initAgeRanking();
         initMaleRanking();
