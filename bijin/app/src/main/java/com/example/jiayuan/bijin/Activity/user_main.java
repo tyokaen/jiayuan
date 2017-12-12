@@ -1,6 +1,7 @@
 package com.example.jiayuan.bijin.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -78,18 +79,34 @@ public class user_main extends AppCompatActivity {
                 Transction(R.id.frg_root,rankListFragment,"com.example.jiayuan.bijin.Fragment.RankListFragment",trans);
                 drawerLayout.closeDrawers();
             }
-
         }
     }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main);
+         Intent intent=getIntent();
+        if(!(intent==null)) {
+            String str = intent.getStringExtra("shift");
+            if (str != null) {
+                if (str.equals("ToTagChoice")) {
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction trans = fragmentManager.beginTransaction();
+                    Transction(R.id.frg_root, tagChoiceFragment, "com.example.jiayuan.bijin.Fragment.TagChoiceFragment", trans);
+                }
+            } else {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction trans = fragmentManager.beginTransaction();
+                Transction(R.id.frg_root, myPageFragment, "com.example.jiayuan.bijin.Fragment.MyPageFragment", trans);
+            }
+        }
+
         init();
         toolbar.setTitle("toolbar");
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         actionBarDrawerToggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open, R.string.close){
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -101,7 +118,7 @@ public class user_main extends AppCompatActivity {
         };
         actionBarDrawerToggle.syncState();
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
-        drawerLayout.openDrawer(navigationView);
+        drawerLayout.closeDrawers();
     }
     public void init(){
         drawerLayout=(DrawerLayout)findViewById(R.id.drawer);
@@ -202,7 +219,6 @@ public class user_main extends AppCompatActivity {
             }
         }).start();
     }
-
     }
 
 

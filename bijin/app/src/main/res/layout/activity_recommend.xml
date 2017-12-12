@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.jiayuan.bijin.Activity.Pre_recommend"
-    tools:showIn="@layout/activity_pre_recommend">
+    tools:context="com.example.jiayuan.bijin.Activity.recommend">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +22,7 @@
         android:textColor="@color/white"
         android:background="@color/specialblue"
         android:gravity="center_horizontal"
-        android:id="@+id/Tx_Count_Choose"
+        android:id="@+id/Tx_Count_Choose_Rec"
         />
     <TextView
         android:id="@+id/text"
@@ -38,28 +36,23 @@
         android:textColor="@color/specialblue"
         android:text="リフレッシュしてください↓↓↓"
         android:gravity="center_horizontal"
-        android:id="@+id/Tx_refresh"
+        android:id="@+id/Tx_refresh_Rec"
         />
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/swip"
-        android:layout_marginLeft="20dp"
+        android:id="@+id/swip_Rec"
         >
         <GridView
             android:layout_marginTop="20dp"
-            android:id="@+id/Grid_Pre_Rec"
+            android:id="@+id/Grid_Rec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numColumns="2"
+            android:numColumns="3"
             android:layout_marginLeft="20dp"
             android:verticalSpacing="20dp"
             android:horizontalSpacing="20dp"
             />
 
     </android.support.v4.widget.SwipeRefreshLayout>
-
-
-
 </LinearLayout>
-

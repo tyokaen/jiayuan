@@ -47,7 +47,6 @@ public class ImageAdapter extends BaseAdapter
         final int reflectionGap = 4;
         int index = 0;
         for (int imageId : mImageIds) {
-
             Bitmap originalImage = BitmapFactory.decodeResource(mContext.getResources(), imageId);
             int width = originalImage.getWidth();
             int height = originalImage.getHeight();

@@ -1,5 +1,6 @@
 package com.example.jiayuan.bijin.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -49,6 +50,7 @@ ExecutorService executorService= Executors.newCachedThreadPool();
     int count=1;
     MyHandler myHandler=new MyHandler();
     ArrayList<Future> futureArrayList=new ArrayList<Future>();
+    ProgressDialog progressDialog=null;
     class MyHandler extends Handler{
         @Override
         public void handleMessage(Message msg) {
@@ -98,11 +100,11 @@ public void init(){
                // Intent intent=new Intent(this,signup.class);
                // startActivity(intent);
             case R.id.login:
-                login_success(Ed_id.getText().toString(),Ed_pwd.getText().toString());
+                //login_success(Ed_id.getText().toString(),Ed_pwd.getText().toString());
                 //login_success(Ed_id.getText().toString(),Ed_pwd.getText().toString());
             //getRankingImage();
-                //Intent intent=new Intent(MainActivity.this,user_main.class);
-                //startActivity(intent);
+                Intent intent=new Intent(MainActivity.this,user_main.class);
+                startActivity(intent);
         }
     }
     public  void ShiftToMain(boolean flag){
@@ -120,6 +122,7 @@ public void init(){
                 .add("password",Pwd)
                 .add("device_os","ios")
                 .build();
+        createDialog();
         new Thread(new Runnable() {
             public void run() {
                 result= OkhttpGet.UsePost(okHttpClient,"http://192.168.0.118/BijinTemp/index.php/api/login","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", formBody);
@@ -135,6 +138,9 @@ public void init(){
             }
         }).start();
        return Boolean.parseBoolean(flag);
+    }
+    public void createDialog() {
+        progressDialog = ProgressDialog.show(this, "提示", "ログインしています");
     }
     }
 

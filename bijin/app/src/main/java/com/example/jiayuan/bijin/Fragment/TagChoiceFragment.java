@@ -1,5 +1,6 @@
 package com.example.jiayuan.bijin.Fragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.jiayuan.bijin.Activity.Pre_recommend;
 import com.example.jiayuan.bijin.Okhttp.OkhttpGet;
 import com.example.jiayuan.bijin.R;
 import com.example.jiayuan.bijin.Tools.StringToJson;
@@ -31,16 +33,40 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * Created by jiayuan on 2017/12/08.
+ * Created by jiayuan on 2017/12/0.
  */
 
-public class TagChoiceFragment extends Fragment {
+public class TagChoiceFragment extends Fragment implements View.OnClickListener{
     biJinTagView tagView,tagView1,tagView2,tagView3,tagView4,tagView5,tagView6;
     TextView Tx_tag_name1,Tx_tag_name2,Tx_tag_name3,Tx_tag_name4,Tx_tag_name5,Tx_tag_name6;
     CircleImageView Img_tag1,Img_tag2,Img_tag3,Img_tag4,Img_tag5,Img_tag6;
     TagHandler myhandler=new TagHandler();
     OkHttpClient okHttpClient=new OkHttpClient();
     JSONArray jsonArray=new JSONArray();
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.Tag1:
+                lanuch(4);
+                break;
+            case R.id.Tag2:
+                lanuch(6);
+                break;
+            case R.id.Tag3:
+               lanuch(1);
+                break;
+            case R.id.Tag4:
+                lanuch(3);
+                break;
+            case R.id.Tag5:
+                lanuch(5);
+                break;
+            case R.id.Tag6:
+                lanuch(2);
+                break;
+        }
+    }
     class TagHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
@@ -64,8 +90,8 @@ public class TagChoiceFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
+
 
         }
     }
@@ -76,13 +102,25 @@ public class TagChoiceFragment extends Fragment {
         getTagName();
         return root;
     }
+    public void lanuch(int id){
+        Intent intent=new Intent(this.getActivity(), Pre_recommend.class);
+        intent.putExtra("TagId",id);
+        startActivity(intent);
+
+    }
     public void initview(View view){
         tagView1=(biJinTagView)view.findViewById(R.id.Tag1);
+        tagView1.setOnClickListener(this);
         tagView2=(biJinTagView)view.findViewById(R.id.Tag2);
+        tagView2.setOnClickListener(this);
         tagView3=(biJinTagView)view.findViewById(R.id.Tag3);
+        tagView3.setOnClickListener(this);
         tagView4=(biJinTagView)view.findViewById(R.id.Tag4);
+        tagView4.setOnClickListener(this);
         tagView5=(biJinTagView)view.findViewById(R.id.Tag5);
+        tagView5.setOnClickListener(this);
         tagView6=(biJinTagView)view.findViewById(R.id.Tag6);
+        tagView6.setOnClickListener(this);
         Tx_tag_name1=(TextView)tagView1.findViewById(R.id.Tx_tag_name);
         Tx_tag_name2=(TextView)tagView2.findViewById(R.id.Tx_tag_name);
         Tx_tag_name3=(TextView)tagView3.findViewById(R.id.Tx_tag_name);
@@ -132,6 +170,6 @@ public class TagChoiceFragment extends Fragment {
                 });
             }
         }).start();
-
     }
+
 }

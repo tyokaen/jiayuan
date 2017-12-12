@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="140dp"
+    android:layout_height="140dp"
+    android:descendantFocusability="blocksDescendants"
+    >
+<ImageView
+    android:layout_height="140dp"
+    android:layout_width="140dp"
+    android:id="@+id/Img_pre_recommend"
+    android:scaleType="fitXY"
+    />
+<ImageView
+    android:layout_height="140dp"
+    android:layout_width="140dp"
+    android:id="@+id/Img_check_background"
+    android:src="@drawable/checkbox"
+    android:visibility="invisible"
+    />
+    <CheckBox
+        android:layout_height="140dp"
+        android:layout_width="140dp"
+        android:id="@+id/check"
+        android:checked="false"
+        android:button="@null"
+        />
+</FrameLayout>

@@ -135,21 +135,27 @@ public class ModelRankFragment extends Fragment implements AdapterView.OnItemSel
             super.handleMessage(msg);
             if (msg.arg1 == 3) {
                 jsonArray = StringToJson.getJSonArray(jsonArray, (String) msg.obj, "popular_bijin");
-                final RequestBody requestBody = null;
-                new Thread(new Runnable() {
-                    int i = 0;
-                    public void run() {
-                        while (i < 9) {
-                            try {
-                                getRangkingImage(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/bijin/image?token=" + jsonArray.getJSONObject(i).getString("bijin_token") + "&size=small", "X-BijinScience",
-                                        "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody, imageViewArrayList.get(i));
-                            } catch (JSONException e) {
-                                //e.printStackTrace();
+                if(jsonArray.length()==0){
+
+                }
+                else {
+                    final RequestBody requestBody = null;
+                    new Thread(new Runnable() {
+                        int i = 0;
+
+                        public void run() {
+                            while (i < 9) {
+                                try {
+                                    getRangkingImage(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/bijin/image?token=" + jsonArray.getJSONObject(i).getString("bijin_token") + "&size=small", "X-BijinScience",
+                                            "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody, imageViewArrayList.get(i));
+                                } catch (JSONException e) {
+                                    //e.printStackTrace();
+                                }
+                                i++;
                             }
-                            i++;
                         }
-                   }
-                }).start();
+                    }).start();
+                }
             }
         }
     }

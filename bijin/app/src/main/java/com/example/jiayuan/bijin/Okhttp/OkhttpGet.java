@@ -3,7 +3,13 @@ package com.example.jiayuan.bijin.Okhttp;
 import android.os.Handler;
 import android.os.Message;
 
+import com.example.jiayuan.bijin.Tools.StringToJson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -21,7 +27,8 @@ public class OkhttpGet {
     /*
     需要更新UI控件
      */
-public  static  void UseGetString(OkHttpClient okHttpClient, String url, String headerKey, String headerVal, RequestBody body, final Handler handler, final int arg){
+public  static String UseGetString(OkHttpClient okHttpClient, String url, String headerKey, String headerVal, RequestBody body, final Handler handler, final int arg){
+        String result="";
     Request request = new Request.Builder().url(url)
             .header(headerKey,headerVal)
             .method("GET", body)
@@ -39,12 +46,68 @@ public  static  void UseGetString(OkHttpClient okHttpClient, String url, String 
             handler.sendMessage(message);
         }
     });
+    return result;
 }
 /*
 获取图片token的JSONArray
 
  */
     public  static String UseGetArray(OkHttpClient okHttpClient, String url, String headerKey, String headerVal, RequestBody body) {
+        String result="";
+        Request request = new Request.Builder().url(url)
+                .header(headerKey,headerVal)
+                .method("GET", body)
+                .build();
+        Response response= null;
+        try {
+            response = okHttpClient.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response.isSuccessful()) {
+            try {
+                result= response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+    public  static String UseGetList(OkHttpClient okHttpClient, String url, String headerKey, String headerVal, RequestBody body,ArrayList<String> arrayList,String arrayKey) {
+       int ArraySize=0;
+       String result="";
+        Request request = new Request.Builder().url(url)
+                .header(headerKey,headerVal)
+                .method("GET", body)
+                .build();
+        Response response= null;
+        try {
+            response = okHttpClient.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(response.isSuccessful()) {
+            try {
+               result= response.body().string();
+                JSONArray jsonArray=new JSONArray();
+                jsonArray= StringToJson.getJSonArray(jsonArray,result,arrayKey);
+                ArraySize=jsonArray.length();
+                for(int i=0;i<jsonArray.length();i++){
+                    try {
+                        String token=jsonArray.getJSONObject(i).getString("bijin_token");
+                        arrayList.add(token);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+             return result;
+    }
+    public  static String UseGetString1(OkHttpClient okHttpClient, String url, String headerKey, String headerVal, RequestBody body) {
         String result="";
         Request request = new Request.Builder().url(url)
                 .header(headerKey,headerVal)

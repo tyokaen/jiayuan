@@ -35,7 +35,8 @@
         <activity
             android:name=".Activity.Pre_recommend"
             android:label="@string/title_activity_pre_recommend"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Activity.recommend"></activity>
     </application>
 
 </manifest>

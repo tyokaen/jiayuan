@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -40,67 +41,74 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class Pre_recommend extends AppCompatActivity {
-private SwipeRefreshLayout swipeRefreshLayout=null;
-public GridView gridView=null;
+import static com.example.jiayuan.bijin.cache.UserTokenCache.userTokenCache;
+
+public class recommend extends AppCompatActivity {
 ArrayList<String> bijinToken=new ArrayList<String>();
-TextView textView=null,Tx_Choice_count;
-OkHttpClient okHttpClient=new OkHttpClient();
-Myhandler myhandler=new Myhandler();
-private HashMap<Integer,View> hashMap=new HashMap<Integer,View>();
-String Token="";
- String result="";
+GridView Rec_gridView=null;
+TextView Tx_Choice_Count=null,Tx_refresh;
+HashMap<Integer,View>hashMap=new HashMap<Integer, View>();
+ArrayList<String> BIjinTokenList=new ArrayList<String>();
 int ChoiceCount=0;
-ArrayList<String> BijinTokeList=new ArrayList<String>();
-ImageView imageView=null;
-int checkCount=0;
-class Myhandler extends Handler{
+OkHttpClient okHttpClient=new OkHttpClient();
+SwipeRefreshLayout swipeRefreshLayout=null;
+Myhandler myHandler=new Myhandler();
+int arraySize=0;
+String result="";
+    FragmentManager fragmentManager=getSupportFragmentManager();
+class Myhandler extends Handler {
     @Override
     public void handleMessage(Message msg) {
         super.handleMessage(msg);
         if(msg.arg1==1){
-            GridviewAdapter gridviewAdapter=new GridviewAdapter(Pre_recommend.this);
-            gridView.setAdapter(gridviewAdapter);
+            GridviewAdapter gridviewAdapter=new GridviewAdapter(recommend.this);
+          Rec_gridView.setAdapter(gridviewAdapter);
         }
-        else if(msg.arg1==4)
+        else if(msg.arg1==4){
             if(StringToJson.JsonToString(result,"result").equals("true")){
-                lanuch();
+                 makeDialog1();
             }
+        }
     }
 }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pre_recommend);
-       getPreRecommendToken();
-        swipeRefreshLayout=(SwipeRefreshLayout)this.findViewById(R.id.swip);
-        textView=(TextView)this.findViewById(R.id.Tx_refresh);
-        Tx_Choice_count=(TextView)this.findViewById(R.id.Tx_Count_Choose);
+        setContentView(R.layout.activity_recommend);
+        Rec_gridView=(GridView) this.findViewById(R.id.Grid_Rec);
+        swipeRefreshLayout=(SwipeRefreshLayout)this.findViewById(R.id.swip_Rec);
+        Tx_Choice_Count=(TextView)this.findViewById(R.id.Tx_Count_Choose_Rec);
+        Tx_refresh=(TextView)this.findViewById(R.id.Tx_refresh_Rec);
+        getBijnToken();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
             public void onRefresh() {
-                textView.setText("リフレッシュ中");
                 if(ChoiceCount<3){
-                    Toast.makeText(Pre_recommend.this,ChoiceCount+"枚の画像もう保存しました！！",Toast.LENGTH_LONG).show();
-                    getPreRecommendToken();
+                    Toast.makeText(recommend.this,ChoiceCount+"枚の画像もう保存しました！！",Toast.LENGTH_LONG).show();
+                    getBijnToken();
                 }
-               clearList(bijinToken);
+                clearList(bijinToken);
                 hashMap.clear();
-                Pre_recommend.this.runOnUiThread(new Runnable() {
+                recommend.this.runOnUiThread(new Runnable() {
                     public void run() {
-                       textView.setText("リフレッシュしてください↓↓↓");
+                        Tx_refresh.setText("リレッシュしてください↓↓↓");
                     }
                 });
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-        gridView=(GridView)this.findViewById(R.id.Grid_Pre_Rec);
     }
+
+    private void clearList(ArrayList<String> bijinToken) {
+        bijinToken.clear();
+    }
+
     class GridviewAdapter extends BaseAdapter implements AbsListView.OnScrollListener {
         Context context;
         private int mFirstVisibleItem;
         private int mVisibleItemCount;
         public GridviewAdapter(Context context) {
             this.context = context;
-            gridView.setOnScrollListener(this);
+            Rec_gridView.setOnScrollListener(this);
         }
         public int getCount() {
             return bijinToken.size();
@@ -122,9 +130,9 @@ class Myhandler extends Handler{
             MyHolder myHolder = null;
             if (hashMap.get(position)==null||!hashMap.containsKey(position)) {
                 myHolder = new MyHolder();
-                convertView = LayoutInflater.from(context).inflate(R.layout.pre_recmmend_image, null);
-                myHolder.imageView = (ImageView) convertView.findViewById(R.id.Img_pre_recommend);
-                myHolder.checkBox=(CheckBox) convertView.findViewById(R.id.check);
+                convertView = LayoutInflater.from(context).inflate(R.layout.recommend_image, null);
+                myHolder.imageView = (ImageView) convertView.findViewById(R.id.Img_recommend);
+                myHolder.checkBox=(CheckBox) convertView.findViewById(R.id.check_Rec);
                 myHolder.checkBox.setChecked(false);
                 myHolder.ImageView_back=(ImageView)convertView.findViewById(R.id.Img_check_background);
                 convertView.setTag(myHolder);
@@ -145,16 +153,16 @@ class Myhandler extends Handler{
                         }
                         else{
                             finalMyHolder.ImageView_back.setVisibility(View.VISIBLE);
-                            BijinTokeList.add(bijinToken.get(position));
+                           BIjinTokenList.add(bijinToken.get(position));
                             ChoiceCount++;
-                            Tx_Choice_count.setText("後" + (3 - ChoiceCount) + "枚選んでください");
+                            Tx_Choice_Count.setText("後" + (3 - ChoiceCount) + "枚選んでください");
                         }
                     }
                     else {
-                            finalMyHolder.ImageView_back.setVisibility(View.INVISIBLE);
-                            BijinTokeList.remove(ChoiceCount - 1);
-                            ChoiceCount--;
-                            Tx_Choice_count.setText("後" + (3 - ChoiceCount) + "枚選んでください");
+                        finalMyHolder.ImageView_back.setVisibility(View.INVISIBLE);
+                        BIjinTokenList.remove(ChoiceCount - 1);
+                        ChoiceCount--;
+                        Tx_Choice_Count.setText("後" + (3 - ChoiceCount) + "枚選んでください");
                     }
                     if(ChoiceCount==3)
                         makeDialog();
@@ -205,10 +213,10 @@ class Myhandler extends Handler{
             public void onResponse(Call call, Response response) throws IOException {
                 final byte[] b = response.body().bytes();
                 final Bitmap bitmap = ToolsBitmap.getInstance().compressBitmap(b);
-                if (Pre_recommend.this!= null&&bijinToken.size()>0) {
-                    Pre_recommend.this.runOnUiThread(new Runnable() {
+                if (recommend.this!= null&&bijinToken.size()>0) {
+                    recommend.this.runOnUiThread(new Runnable() {
                         public void run() {
-                            ImageView imageView = (ImageView) gridView.findViewWithTag(bijinToken.get(position));
+                            ImageView imageView = (ImageView) Rec_gridView.findViewWithTag(bijinToken.get(position));
                             if(bitmap!=null&&imageView!=null)
                                 imageView.setImageBitmap(bitmap);
                             else imageView.setImageResource(R.drawable.defaultuserimage);
@@ -222,63 +230,74 @@ class Myhandler extends Handler{
         ImageView imageView,ImageView_back;
         CheckBox checkBox;
     }
-    public void getPreRecommendToken(){
-        final RequestBody requestBody = null;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                OkhttpGet.UseGetList(okHttpClient, "http://192.168.0.118/BijinScience-Web/index.php/api/recommend/setup?user_token="+ UserTokenCache.getInstance().getUserToken(Pre_recommend.this)+"&count=6", "X-BijinScience",
-                        "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,bijinToken,"bijin_token_list");
-                Message message=new Message();
-                message.arg1=1;
-                myhandler.sendMessage(message);
-
-            }
-        }).start();
-    }
-    public void clearList(ArrayList<String> list){
-        list.clear();
-        }
-        public void makeDialog(){
-            AlertDialog.Builder alertDialog=new AlertDialog.Builder(Pre_recommend.this);
-            alertDialog.setMessage("推薦してよろしんですか？");
-            alertDialog.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
-            alertDialog.setPositiveButton("推薦", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                      postPreRecommend();
-                }
-            });
-               alertDialog.show();
-        }
-    public void postPreRecommend(){
-        final FormBody formbody=new FormBody.Builder()
-                .add("user_token",UserTokenCache.getInstance().getUserToken(Pre_recommend.this))
-                .add("bijin_token_one",BijinTokeList.get(0))
-                .add("bijin_token_two",BijinTokeList.get(1))
-                .add("bijin_token_three",BijinTokeList.get(2))
-                .add("tag_id",""+getIntent().getIntExtra("TagId",100))
+   public void getBijnToken(){
+       final RequestBody requestBody=null;
+       new Thread(new Runnable() {
+           @Override
+           public void run() {
+            result=OkhttpGet.UseGetList(okHttpClient, "http://192.168.0.118/BijinScience-Web/index.php/api/recommend/result?"+"\n"+"user_token="+userTokenCache.getInstance().getUserToken(recommend.this)+"&bijin_token_one="+getIntent().getStringExtra("bijin_token_one")+"&bijin_token_two="+getIntent().getStringExtra("bijin_token_two")+"&bijin_token_three="+getIntent().getStringExtra("bijin_token_three")+"&tag_id="+ getIntent().getIntExtra("tag_id",100),
+                       "X-BijinScience",
+                       "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,bijinToken,"recommend_token_list");
+                     Message message=new Message();
+                     message.arg1=1;
+               myHandler.sendMessage(message);
+           }
+       }).start();
+   }
+    public void postPreRecommend() {
+        final FormBody formbody = new FormBody.Builder()
+                .add("user_token", UserTokenCache.getInstance().getUserToken(recommend.this))
+                .add("bijin_token_one", BIjinTokenList.get(0))
+                .add("bijin_token_two", BIjinTokenList.get(1))
+                .add("bijin_token_three", BIjinTokenList.get(2))
+                .add("tag_id", "" + getIntent().getIntExtra("TagId", 100))
                 .build();
         new Thread(new Runnable() {
             public void run() {
-                result=OkhttpGet.UsePost(okHttpClient,"http://192.168.0.118/BijinScience-Web/index.php/api/tag/vote","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", formbody);
-                Message message=new Message();
-                message.arg1=4;
-                myhandler.sendMessage(message);
+                result = OkhttpGet.UsePost(okHttpClient, "http://192.168.0.118/BijinScience-Web/index.php/api/tag/vote", "X-BijinScience", "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", formbody);
+                Message message = new Message();
+                message.arg1 = 4;
+                myHandler.sendMessage(message);
             }
         }).start();
     }
-    public void lanuch(){
-        Intent intent=new Intent(Pre_recommend.this,recommend.class);
-        intent.putExtra("bijin_token_one",BijinTokeList.get(0));
-        intent.putExtra("bijin_token_two",BijinTokeList.get(1));
-        intent.putExtra("bijin_token_three",BijinTokeList.get(2));
-        intent.putExtra("tag_id",getIntent().getIntExtra("TagId",100));
-        startActivity(intent);
-
+    public void makeDialog(){
+        AlertDialog.Builder alertDialog=new AlertDialog.Builder(recommend.this);
+        alertDialog.setMessage("推薦結果を送りますか？");
+        alertDialog.setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        alertDialog.setPositiveButton("submit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                postPreRecommend();
+            }
+        });
+        alertDialog.show();
     }
+    public void makeDialog1(){
+        AlertDialog.Builder alertDialog=new AlertDialog.Builder(recommend.this);
+        alertDialog.setMessage("推薦完了しました");
+        alertDialog.setNegativeButton("もう一回", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                   Intent intent=new Intent(recommend.this,user_main.class);
+                   intent.putExtra("shift","ToTagChoice");
+                   startActivity(intent);
+            }
+        });
+        alertDialog.setPositiveButton("マイページへ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent=new Intent(recommend.this,user_main.class);
+                startActivity(intent);
+
+            }
+        });
+        alertDialog.show();
+    }
+
+
 }
