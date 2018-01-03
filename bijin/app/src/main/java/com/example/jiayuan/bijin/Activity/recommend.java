@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -55,7 +54,6 @@ SwipeRefreshLayout swipeRefreshLayout=null;
 Myhandler myHandler=new Myhandler();
 int arraySize=0;
 String result="";
-    FragmentManager fragmentManager=getSupportFragmentManager();
 class Myhandler extends Handler {
     @Override
     public void handleMessage(Message msg) {
@@ -178,7 +176,7 @@ class Myhandler extends Handler {
                 public void run() {
                     for (int i = firstVisibleItem; i < firstVisibleItem + visibleItemCount; i++) {
                         {
-                            UseGetImage1(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/bijin/image?token=" + bijinToken.get(i) + "&size=small", "X-BijinScience",
+                            UseGetImage1(okHttpClient, "http://192.168.0.103/BijinTemp/index.php/api/bijin/image?token=" + bijinToken.get(i) + "&size=small", "X-BijinScience",
                                     "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody, i);
                         }
 
@@ -235,7 +233,7 @@ class Myhandler extends Handler {
        new Thread(new Runnable() {
            @Override
            public void run() {
-            result=OkhttpGet.UseGetList(okHttpClient, "http://192.168.0.118/BijinScience-Web/index.php/api/recommend/result?"+"\n"+"user_token="+userTokenCache.getInstance().getUserToken(recommend.this)+"&bijin_token_one="+getIntent().getStringExtra("bijin_token_one")+"&bijin_token_two="+getIntent().getStringExtra("bijin_token_two")+"&bijin_token_three="+getIntent().getStringExtra("bijin_token_three")+"&tag_id="+ getIntent().getIntExtra("tag_id",100),
+            result=OkhttpGet.UseGetList(okHttpClient, "http://192.168.0.103/BijinScience-Web/index.php/api/recommend/result?"+"\n"+"user_token="+userTokenCache.getInstance().getUserToken(recommend.this)+"&bijin_token_one="+getIntent().getStringExtra("bijin_token_one")+"&bijin_token_two="+getIntent().getStringExtra("bijin_token_two")+"&bijin_token_three="+getIntent().getStringExtra("bijin_token_three")+"&tag_id="+ getIntent().getIntExtra("tag_id",100),
                        "X-BijinScience",
                        "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,bijinToken,"recommend_token_list");
                      Message message=new Message();
@@ -250,11 +248,11 @@ class Myhandler extends Handler {
                 .add("bijin_token_one", BIjinTokenList.get(0))
                 .add("bijin_token_two", BIjinTokenList.get(1))
                 .add("bijin_token_three", BIjinTokenList.get(2))
-                .add("tag_id", "" + getIntent().getIntExtra("TagId", 100))
+                .add("tag_id", "" + getIntent().getIntExtra("tag_id", 100))
                 .build();
         new Thread(new Runnable() {
             public void run() {
-                result = OkhttpGet.UsePost(okHttpClient, "http://192.168.0.118/BijinScience-Web/index.php/api/tag/vote", "X-BijinScience", "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", formbody);
+                result = OkhttpGet.UsePost(okHttpClient, "http://192.168.0.103/BijinScience-Web/index.php/api/tag/vote", "X-BijinScience", "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", formbody);
                 Message message = new Message();
                 message.arg1 = 4;
                 myHandler.sendMessage(message);

@@ -17,7 +17,7 @@
      android:orientation="vertical"
      >
      <TextView
-         android:textColor="@color/white"
+         android:textColor="@color/black"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:text="@string/opinion_Des"
@@ -119,7 +119,7 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/goastwhite"
+            android:textColor="@color/blue"
             android:textSize="30sp"
             android:layout_gravity="center_vertical"
             android:id="@+id/syncro_sex_title"
@@ -130,7 +130,7 @@
             android:id="@+id/R_syncro_sex"
             android_custom:startAngle="-90"
             android_custom:roundColor="#D1D1D1"
-            android_custom:roundProgressColor="@color/goastwhite"
+            android_custom:roundProgressColor="@color/blue"
             android_custom:textColor="#9A32CD"
             android_custom:textIsDisplayable="true"
             android_custom:roundWidth="30dip"

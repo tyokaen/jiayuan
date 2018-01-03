@@ -33,6 +33,7 @@
        android:id="@+id/male_rangking1"
        android:layout_weight="1"
        android:src="@drawable/load"
+       android:scaleType="centerInside"
        />
      <ImageView
          android:layout_height="50dp"
@@ -40,6 +41,7 @@
          android:id="@+id/male_rangking2"
          android:layout_weight="1"
          android:src="@drawable/load"
+         android:scaleType="centerInside"
          />
      <ImageView
          android:layout_height="50dp"
@@ -47,6 +49,7 @@
          android:id="@+id/male_rangking3"
          android:layout_weight="1"
          android:src="@drawable/load"
+         android:scaleType="centerInside"
          />
   </LinearLayout>
 

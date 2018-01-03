@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.example.jiayuan.bijin.Okhttp.OkhttpGet;
 import com.example.jiayuan.bijin.R;
-import com.example.jiayuan.bijin.Tools.GetUserToken;
 import com.example.jiayuan.bijin.Tools.StringToJson;
 
 import org.json.JSONException;
@@ -39,14 +38,14 @@ SharedPreferences sp=null;
     ProgressDialog dialog=null;
     MyHandler myhadler=new MyHandler();
 class MyHandler extends Handler{
-    @Override
-    public void handleMessage(Message msg) {
+        public void handleMessage(Message msg) {
         if(msg.arg1==1) {
             dialog.cancel();
             textView.setText(result);
             textView.setText(UserToken);
-           // textView1.setText(ImageToken);
+            //textView1.setText(ImageToken);
              ShiftToImage(result,(String)msg.obj);
+            finish();
         }
     }
 }
@@ -64,13 +63,14 @@ class MyHandler extends Handler{
    void ToMainActivity(){
         Intent intent=new Intent(entrance.this,MainActivity.class);
         startActivity(intent);
+        finish();
     }
     String doGet() throws IOException, JSONException {
         MediaType Json=MediaType.parse("application/json;charset=utf-8");
         JSONObject json=new JSONObject();
         json.put("","");
         RequestBody requestBody=RequestBody.create(Json, String.valueOf(json));
-        result=OkhttpGet.UsePost(httpClient,"http://192.168.0.118/BijinTemp/index.php/api/guest/register","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl",requestBody);
+        result=OkhttpGet.UsePost(httpClient,"http://192.168.0.103/BijinTemp/index.php/api/guest/register","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl",requestBody);
         return  result;
     }
     public void createDialog(){
@@ -106,7 +106,7 @@ class MyHandler extends Handler{
                 }  catch (IOException e) {
                     e.printStackTrace();
                 }
-              OkhttpGet.UseGetString(httpClient,"http://192.168.0.118/BijinTemp/index.php/api/bijin/setup?user_token="+UserToken+"&count=10","X-BijinScience",
+              OkhttpGet.UseGetString(httpClient,"http://192.168.0.103/BijinTemp/index.php/api/bijin/setup?user_token="+UserToken+"&count=10","X-BijinScience",
                         "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl",body,myhadler,1);
             }
         }).start();
@@ -122,13 +122,4 @@ class MyHandler extends Handler{
         }
     }
 
-    /**
-     * Created by jiayuan on 2017/11/01.
-     */
-    public void storeUserToken(String usertoken){
-     sp= GetUserToken.getInstance().getSp(this);
-        SharedPreferences.Editor editor=sp.edit();
-        editor.putString("usertoken",usertoken);
-        editor.commit();
-    }
 }

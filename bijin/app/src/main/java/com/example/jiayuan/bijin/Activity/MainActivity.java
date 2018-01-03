@@ -15,20 +15,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.jiayuan.bijin.Okhttp.OkhttpGet;
+import com.example.jiayuan.bijin.Presenter.LoginAction;
 import com.example.jiayuan.bijin.R;
 import com.example.jiayuan.bijin.Tools.StringToJson;
 import com.example.jiayuan.bijin.cache.UserTokenCache;
 
-import org.json.JSONException;
-
-import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText Ed_id, Ed_pwd;
@@ -42,20 +34,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String result=null;
     MyHandler myhandler=new MyHandler();
     String flag="";
-    ArrayList<String> arrayList=new ArrayList<String>();
-    OkHttpClient okHttpClient=new OkHttpClient();
-    String imagetoken=null;
-    StringBuffer sb=new StringBuffer();
-ExecutorService executorService= Executors.newCachedThreadPool();
-    int count=1;
-    MyHandler myHandler=new MyHandler();
-    ArrayList<Future> futureArrayList=new ArrayList<Future>();
     ProgressDialog progressDialog=null;
     class MyHandler extends Handler{
         @Override
         public void handleMessage(Message msg) {
             if (msg.arg1==1) {
-                UserTokenCache.getInstance().storeUserToken(MainActivity.this,StringToJson.JsonToString(result,"user_token"));
+                UserTokenCache.getInstance().storeUserToken(MainActivity.this, StringToJson.JsonToString(result,"user_token"));
+                UserTokenCache.getInstance().storeUserPwd(MainActivity.this,Ed_pwd.getText().toString());
                 ShiftToMain(Boolean.parseBoolean((String)msg.obj));
             }
         }
@@ -96,48 +81,29 @@ public void init(){
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-           // case R.id.register:
-               // Intent intent=new Intent(this,signup.class);
-               // startActivity(intent);
             case R.id.login:
-                //login_success(Ed_id.getText().toString(),Ed_pwd.getText().toString());
-                //login_success(Ed_id.getText().toString(),Ed_pwd.getText().toString());
-            //getRankingImage();
-                Intent intent=new Intent(MainActivity.this,user_main.class);
-                startActivity(intent);
+                try {
+                    login_success(Ed_id.getText().toString(),Ed_pwd.getText().toString());
+                } catch (IOException e) {
+                   // e.printStackTrace();
+                }
         }
     }
     public  void ShiftToMain(boolean flag){
         if(flag){
+            progressDialog.cancel();
             Intent intent=new Intent(this, user_main.class);
             startActivity(intent);
+            finish();
         }
         else{
             Toast.makeText(this,"账号或密码有误",Toast.LENGTH_SHORT).show();
         }
     }
-    public boolean login_success(String Id,String Pwd){
-        final FormBody formBody=new FormBody.Builder()
-                .add("screen_name",Id)
-                .add("password",Pwd)
-                .add("device_os","ios")
-                .build();
+    public void login_success(final String Id, final String Pwd) throws IOException {
+        final LoginAction loginAction=new LoginAction();
         createDialog();
-        new Thread(new Runnable() {
-            public void run() {
-                result= OkhttpGet.UsePost(okHttpClient,"http://192.168.0.118/BijinTemp/index.php/api/login","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", formBody);
-                try {
-                    flag= StringToJson.ToJSon(result).getString("result");
-                } catch (JSONException e) {
-                    //e.printStackTrace();
-                }
-                Message message=new Message();
-                message.arg1=1;
-                message.obj=flag;
-                myhandler.sendMessage(message);
-            }
-        }).start();
-       return Boolean.parseBoolean(flag);
+        result=loginAction.Login(Id,Pwd,myhandler);
     }
     public void createDialog() {
         progressDialog = ProgressDialog.show(this, "提示", "ログインしています");

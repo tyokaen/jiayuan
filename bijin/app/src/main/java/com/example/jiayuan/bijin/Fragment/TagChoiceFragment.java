@@ -76,17 +76,17 @@ public class TagChoiceFragment extends Fragment implements View.OnClickListener{
                 RequestBody requestBody=null;
                 try {
                     Tx_tag_name1.setText(jsonArray.getJSONObject(0).getString("tagname"));
-                   getTagImage(okHttpClient, "http://192.168.0.118/BijinScience-Web/index.php/api/tag/image?tagid=4","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,Img_tag1);
+                   getTagImage(okHttpClient, "http://192.168.0.103/BijinScience-Web/index.php/api/tag/image?tagid=4","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,Img_tag1);
                     Tx_tag_name2.setText(jsonArray.getJSONObject(1).getString("tagname"));
-                    getTagImage(okHttpClient, "http://192.168.0.118/BijinScience-Web/index.php/api/tag/image?tagid=6","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,Img_tag2);
+                    getTagImage(okHttpClient, "http://192.168.0.103/BijinScience-Web/index.php/api/tag/image?tagid=6","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,Img_tag2);
                     Tx_tag_name3.setText(jsonArray.getJSONObject(2).getString("tagname"));
-                    getTagImage(okHttpClient, "http://192.168.0.118/BijinScience-Web/index.php/api/tag/image?tagid=1","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,Img_tag3);
+                    getTagImage(okHttpClient, "http://192.168.0.103/BijinScience-Web/index.php/api/tag/image?tagid=1","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,Img_tag3);
                     Tx_tag_name4.setText(jsonArray.getJSONObject(3).getString("tagname"));
-                    getTagImage(okHttpClient, "http://192.168.0.118/BijinScience-Web/index.php/api/tag/image?tagid=3","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,Img_tag4);
+                    getTagImage(okHttpClient, "http://192.168.0.103/BijinScience-Web/index.php/api/tag/image?tagid=3","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,Img_tag4);
                     Tx_tag_name5.setText(jsonArray.getJSONObject(4).getString("tagname"));
-                    getTagImage(okHttpClient, "http://192.168.0.118/BijinScience-Web/index.php/api/tag/image?tagid=5","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,Img_tag5);
+                    getTagImage(okHttpClient, "http://192.168.0.103/BijinScience-Web/index.php/api/tag/image?tagid=5","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,Img_tag5);
                     Tx_tag_name6.setText(jsonArray.getJSONObject(5).getString("tagname"));
-                    getTagImage(okHttpClient, "http://192.168.0.118/BijinScience-Web/index.php/api/tag/image?tagid=2","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,Img_tag6);
+                    getTagImage(okHttpClient, "http://192.168.0.103/BijinScience-Web/index.php/api/tag/image?tagid=2","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,Img_tag6);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -140,7 +140,7 @@ public class TagChoiceFragment extends Fragment implements View.OnClickListener{
            final RequestBody requestBody=null;
             @Override
             public void run() {
-                OkhttpGet.UseGetString(okHttpClient, "http://192.168.0.118/BijinScience-Web/index.php/api/tag/info","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,myhandler,2);
+                OkhttpGet.UseGetString(okHttpClient, "http://192.168.0.103/BijinScience-Web/index.php/api/tag/info","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,myhandler,2);
             }
         }).start();
     }

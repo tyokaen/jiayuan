@@ -33,7 +33,7 @@
    android:layout_width="100dp"
    android:layout_marginTop="15dp"
     android:id="@+id/image_best1"
-    android:scaleType="fitXY"
+    android:scaleType="centerInside"
     android:src="@drawable/defaultuserimage"
     android:layout_gravity="center_horizontal"
     />
@@ -65,7 +65,7 @@
             android:layout_marginTop="15dp"
             android:id="@+id/image_best2"
             android:src="@drawable/defaultuserimage"
-            android:scaleType="fitXY"
+            android:scaleType="centerInside"
             android:layout_gravity="center_horizontal"
             />
         <TextView
@@ -96,7 +96,7 @@
             android:layout_marginTop="15dp"
             android:id="@+id/image_best3"
             android:src="@drawable/defaultuserimage"
-            android:scaleType="fitXY"
+            android:scaleType="centerInside"
             android:layout_gravity="center_horizontal"
             />
         <TextView

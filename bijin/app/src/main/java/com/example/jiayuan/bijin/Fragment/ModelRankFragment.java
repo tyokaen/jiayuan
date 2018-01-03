@@ -142,11 +142,10 @@ public class ModelRankFragment extends Fragment implements AdapterView.OnItemSel
                     final RequestBody requestBody = null;
                     new Thread(new Runnable() {
                         int i = 0;
-
                         public void run() {
                             while (i < 9) {
                                 try {
-                                    getRangkingImage(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/bijin/image?token=" + jsonArray.getJSONObject(i).getString("bijin_token") + "&size=small", "X-BijinScience",
+                                    getRangkingImage(okHttpClient, "http://192.168.0.103/BijinTemp/index.php/api/bijin/image?token=" + jsonArray.getJSONObject(i).getString("bijin_token") + "&size=small", "X-BijinScience",
                                             "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody, imageViewArrayList.get(i));
                                 } catch (JSONException e) {
                                     //e.printStackTrace();
@@ -207,17 +206,13 @@ public class ModelRankFragment extends Fragment implements AdapterView.OnItemSel
             ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, city);
             spin_City.setAdapter(cityAdapter);
             spin_City.setOnItemSelectedListener(this);
-
-
     }
-
-
         public void sendRankReq() {
             final RequestBody requestBody = null;
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    OkhttpGet.UseGetString(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/general/hotranking?gender="+sexStr+"&generation="+intage+"&area="+cityString, "X-BijinScience", "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody, myHandler, 3);
+                    OkhttpGet.UseGetString(okHttpClient, "http://192.168.0.103/BijinTemp/index.php/api/general/hotranking?gender="+sexStr+"&generation="+intage+"&area="+cityString, "X-BijinScience", "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody, myHandler, 3);
                 }
             }).start();
         }

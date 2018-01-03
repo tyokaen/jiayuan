@@ -26,7 +26,6 @@
        android:background="@drawable/background_linear"
        android:layout_marginLeft="60dp"
        >
-
    <TextView
        android:layout_height="wrap_content"
        android:layout_width="wrap_content"
@@ -34,7 +33,17 @@
        android:layout_weight="1"
        android:text="研究員No.4307"
        android:layout_marginLeft="100dp"
+       android:textColor="@color/black"
        />
+       <TextView
+           android:layout_height="wrap_content"
+           android:layout_width="wrap_content"
+           android:textSize="15dp"
+           android:layout_weight="1"
+           android:text="研究員"
+           android:textColor="@color/black"
+           android:layout_marginLeft="100dp"
+           />
        <TextView
            android:layout_height="wrap_content"
            android:layout_width="wrap_content"
@@ -51,16 +60,16 @@
            android:layout_weight="1"
            android:id="@+id/user_birth"
            android:layout_marginLeft="100dp"
+           android:textColor="@color/black"
            />
    </LinearLayout>
-
      <com.example.jiayuan.bijin.diy_view.CircleImageView
          android:id="@+id/circleImageView"
          android:layout_width="100dp"
          android:layout_height="100dp"
          android:layout_marginLeft="10dp"
          android:scaleType="fitCenter"
-         android:src="@drawable/a12" />
+         android:src="@drawable/defaultuserimage" />
  </FrameLayout>
 <LinearLayout
     android:layout_height="150dp"
@@ -83,6 +92,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         jia:pagetitle="世論シンクロ率"
+        jia:pagetext="55%"
         android:id="@+id/opinion_count"
         android:layout_weight="1"
         />
@@ -261,7 +271,7 @@
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="3. 佐々木"
+                    android:text="3. 佐々木希"
                     android:textSize="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginStart="20dp"
@@ -316,6 +326,13 @@
          android:id="@+id/age_fifty"
          android:layout_marginTop="30dp"
          />
+     <TextView
+         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+         android:id="@+id/text"
+        />
+
+
             </LinearLayout>
 
 </ScrollView>

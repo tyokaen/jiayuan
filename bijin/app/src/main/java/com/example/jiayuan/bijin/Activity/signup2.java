@@ -48,17 +48,20 @@ public class signup2 extends AppCompatActivity implements View.OnClickListener {
     Myhandler myhandler=new Myhandler();
     JSONObject jsonobject=new JSONObject();
     JSONObject postobject=new JSONObject();
+    String birthday=null;
     class Myhandler extends Handler{
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if(msg.arg1==1)
-                Tx_result.setText(result);
-            if(StringToJson.JsonToString(result,"result").equals("true")){
-                Intent intent=new Intent(signup2.this,MainActivity.class);
-                startActivity(intent);
+            if(msg.arg1==1){
+             if(StringToJson.JsonToString(result,"result").equals("true")) {
+                 Intent intent = new Intent(signup2.this, MainActivity.class);
+                 startActivity(intent);
+             }
+             }
             }
-        }
+
+
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,8 +111,8 @@ public class signup2 extends AppCompatActivity implements View.OnClickListener {
         TimePickerView pvTime = new TimePickerView.Builder(signup2.this, new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date2, View v) {//选中事件回调
-                String time = getTime(date2);
-                Tx_birth.setText(time);
+                 birthday= getTime(date2);
+                Tx_birth.setText(birthday);
             }
         })
                 .setType(TimePickerView.Type.YEAR_MONTH_DAY)//默认全部显示
@@ -134,8 +137,8 @@ public class signup2 extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onOptionsSelect(int options1, int option2, int options3, View v) {
                 //返回的分别是三个级别的选中位置
-                String s = citys[options1];
-                Tx_region.setText(s);
+              String region = citys[options1];
+                Tx_region.setText(region);
             }
         })
                 .setSubCalSize(20)//确定和取消文字大小
@@ -160,10 +163,11 @@ public class signup2 extends AppCompatActivity implements View.OnClickListener {
                 .add("nickname",Ed_name.getText().toString())
                 .add("gender","男性")
                 .add("location",Tx_region.getText().toString())
-                .add("date_of_birth","1992/01/12")
-                .add("secret_question_id",this.getIntent().getStringExtra("Aws"))
+                .add("date_of_birth",birthday)
+                .add("secret_question_id",this.getIntent().getStringExtra("QuesId"))
                 .add("secret_answer",this.getIntent().getStringExtra("Aws"))
                 .add("device_os","ios")
+                .add("device_token","")
                 .build();
             /*
             jsonobject.put("token",this.getIntent().getStringExtra("UserToken"));
@@ -189,7 +193,7 @@ public class signup2 extends AppCompatActivity implements View.OnClickListener {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                result=OkhttpGet.UsePost(okhttpclient,"http://192.168.0.118/BijinTemp/index.php/api/guest/upgrade","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", formbody);
+                result=OkhttpGet.UsePost(okhttpclient,"http://192.168.0.118/BijinScience-Web/index.php/api/guest/upgrade","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", formbody);
                 Message message=new Message();
                 message.arg1=1;
                 myhandler.sendMessage(message);

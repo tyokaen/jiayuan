@@ -79,7 +79,7 @@ public class RankListFragment extends android.support.v4.app.Fragment implements
             super.handleMessage(msg);
             if(msg.arg1==1){
                 Toast.makeText(getActivity(),"登録完了しました",Toast.LENGTH_SHORT).show();
-                UserTokenCache.getInstance().storeUserBestToken(getActivity(),bestBijinToken.get(0),bestBijinToken.get(1),bestBijinToken.get(2));
+
             }
             else if(msg.arg1==3){
                jsonArray=StringToJson.getJSonArray(jsonArray,(String)msg.obj,"best");
@@ -94,7 +94,7 @@ public class RankListFragment extends android.support.v4.app.Fragment implements
                             RequestBody requestBody=null;
                             while(i<3)
                                 try {
-                                    getBestBijin(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/bijin/image?token=" + jsonArray.getJSONObject(i).getString("bijin_token") + "&size=small", "X-BijinScience",
+                                    getBestBijin(okHttpClient, "http://192.168.0.103/BijinTemp/index.php/api/bijin/image?token=" + jsonArray.getJSONObject(i).getString("bijin_token") + "&size=small", "X-BijinScience",
                                             "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,imageViews.get(i));
                                     i++;
                                 } catch (JSONException e) {
@@ -127,7 +127,6 @@ public class RankListFragment extends android.support.v4.app.Fragment implements
         Tx_best_name2=(TextView)view.findViewById(R.id.Tx_best2_name);
         Tx_best_name3=(TextView)view.findViewById(R.id.Tx_best3_name);
         //textView = (TextView) view.findViewById(R.id.text_like_list);
-        arr_best_bijin_token=UserTokenCache.getInstance().getBestToken(getActivity());
         Btn_choice1.setOnClickListener(this);
         Btn_choice2.setOnClickListener(this);
         Btn_choice3.setOnClickListener(this);
@@ -255,7 +254,7 @@ public class RankListFragment extends android.support.v4.app.Fragment implements
                         {
                             Bitmap bitmap = BijinImageCache.getValueFromCache(bijinToken.get(i));
                             if (bitmap == null)
-                                UseGetImage1(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/bijin/image?token=" + bijinToken.get(i) + "&size=small", "X-BijinScience",
+                                UseGetImage1(okHttpClient, "http://192.168.0.103/BijinTemp/index.php/api/bijin/image?token=" + bijinToken.get(i) + "&size=small", "X-BijinScience",
                                         "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody, i);
                         }
 
@@ -349,7 +348,7 @@ public class RankListFragment extends android.support.v4.app.Fragment implements
         new Thread(new Runnable() {
             @Override
             public void run() {
-                result= OkhttpGet.UsePost(okHttpClient,"http://192.168.0.118/BijinTemp/index.php/api/usersbest","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", formBody);
+                result= OkhttpGet.UsePost(okHttpClient,"http://192.168.0.103/BijinTemp/index.php/api/usersbest","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", formBody);
                 Message message=new Message();
                 message.arg1=1;
                 myhandler.sendMessage(message);
@@ -361,7 +360,7 @@ public class RankListFragment extends android.support.v4.app.Fragment implements
         new Thread(new Runnable() {
             @Override
             public void run() {
-                OkhttpGet.UseGetString(okHttpClient,"http://192.168.0.118/BijinTemp/index.php/api/usersbest?user_token="+UserTokenCache.getInstance().getUserToken(getActivity()),"X-BijinScience",
+                OkhttpGet.UseGetString(okHttpClient,"http://192.168.0.103/BijinTemp/index.php/api/usersbest?user_token="+UserTokenCache.getInstance().getUserToken(getActivity()),"X-BijinScience",
                         "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl",body,myhandler,3);
             }
         }).start();
@@ -379,7 +378,7 @@ public class RankListFragment extends android.support.v4.app.Fragment implements
             }
             public void onResponse(Call call, Response response) throws IOException {
                 final byte[] b = response.body().bytes();
-                final Bitmap bitmap = ToolsBitmap.getInstance().compressBitmap(b);
+                final Bitmap bitmap = ToolsBitmap.getInstance().getScaledBitmap(b,200);
                 if (RankListFragment.this.getActivity() != null) {
                     RankListFragment.this.getActivity().runOnUiThread(new Runnable() {
                         public void run() {

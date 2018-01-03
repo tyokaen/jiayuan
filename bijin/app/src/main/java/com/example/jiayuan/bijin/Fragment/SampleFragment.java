@@ -2,7 +2,6 @@ package com.example.jiayuan.bijin.Fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,12 +18,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
-import com.example.jiayuan.bijin.Adapter.ImageAdapter;
+import com.example.jiayuan.bijin.Activity.input_finish;
 import com.example.jiayuan.bijin.Okhttp.OkhttpGet;
 import com.example.jiayuan.bijin.R;
 import com.example.jiayuan.bijin.Tools.StringToJson;
+import com.example.jiayuan.bijin.Tools.ToolsBitmap;
 import com.example.jiayuan.bijin.cache.UserTokenCache;
-import com.example.jiayuan.bijin.Activity.user_main;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,24 +65,32 @@ public class SampleFragment extends android.support.v4.app.Fragment implements V
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if(msg.arg1==1) {
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes.get(count), 0, bytes.get(count).length);
+                Bitmap bitmap= null;
+                if(b.length>10000)
+                bitmap=ToolsBitmap.getInstance().getScaledBitmap(b,imageSwitcher.getHeight());
+                if(bitmap!=null)
                 imageSwitcher.setImageDrawable(new BitmapDrawable(bitmap));
+                else
+                    imageSwitcher.setImageResource(R.drawable.defaultuserimage);
             }
             else if(msg.arg1==2){
                 count++;
                 if(count<10) {
                     imageSwitcher.setInAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.left_in));
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes.get(count), 0, bytes.get(count).length);
+                    Bitmap bitmap=null;
+                    if(b.length>10000)
+                   bitmap= ToolsBitmap.getInstance().getScaledBitmap(b, imageSwitcher.getHeight());
                     if(bitmap==null)
                         imageSwitcher.setImageResource(R.drawable.defaultuserimage);
-                    imageSwitcher.setImageDrawable(new BitmapDrawable(bitmap));
+                    else {
+                        imageSwitcher.setImageDrawable(new BitmapDrawable(bitmap));
+                    };
                 }
                 if(count==10){
-                    Intent intent=new Intent(getActivity(), user_main.class);
+                    Intent intent=new Intent(getActivity(), input_finish.class);
                     startActivity(intent);
+                    getActivity().finish();
                 }
-
-
             }
 
         }
@@ -91,8 +98,6 @@ public class SampleFragment extends android.support.v4.app.Fragment implements V
 public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.sample_input,container,false);
-        ImageAdapter imageAdapter=new ImageAdapter(getActivity(),images);
-        imageAdapter.createReflectedImages();
         bijinToken=getArguments().getString("ImageToken");
         Log.i("zhangjiayuanyuan",bijinToken);
        imageSwitcher=(ImageSwitcher) root.findViewById(R.id.Gallery1);
@@ -106,7 +111,12 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Tx_progress=(TextView)root.findViewById(R.id.progress_recoder);
         Tx_sam_count=(TextView)root.findViewById(R.id.sample_count);
         Tx_sam_count.setText("あと"+getArrayLength(bijinToken)+"枚");
-        getImage();
+    new Thread(new Runnable() {
+        @Override
+        public void run() {
+            getImage();
+        }
+    }).start();
         return root;
         }
         @Override
@@ -124,7 +134,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            progressBar.setProgress(increment + 10);
                            increment = increment + 10;
                            Tx_progress.setText("" + increment + "%");
-                           Tx_sam_count.setText("あと" + number_left + "枚");
+                           //Tx_sam_count.setText("あと" + number_left + "枚");
                        }
                            else{
 
@@ -142,7 +152,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            progressBar.setProgress(increment + 10);
                            increment = increment + 10;
                            Tx_progress.setText("" + increment + "%");
-                           Tx_sam_count.setText("あと" + number_left + "枚");
+                           //Tx_sam_count.setText("あと" + number_left + "枚");
                        }
                        else{
 
@@ -154,7 +164,7 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
         @Override
         public View makeView() {
                 ImageView imageView=new ImageView(getActivity());
-                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setLayoutParams(new ImageSwitcher.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                         return imageView;
         }
@@ -184,8 +194,9 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
         new Thread(new Runnable() {
             @Override
             public void run() {
-                result = OkhttpGet.UsePost(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/vote","X-BijinScience",
+                result = OkhttpGet.UsePost(okHttpClient, "http://192.168.0.103/BijinTemp/index.php/api/vote","X-BijinScience",
                         "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody);
+                getImage();
                 if(index<10) {
                     Message message = new Message();
                     message.arg1 = 2;
@@ -193,26 +204,18 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 }
             }
         }).start();
-
     }
-    public byte[] getImage(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+    public void getImage(){
                 RequestBody requestBody = null;
-                while (arrayIndex < 10) {
-                    b = OkhttpGet.UseGetImage(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/bijin/image?token=" + getImageToken(jsonArray, arrayIndex) + "&size=large", "X-BijinScience",
+                    b = OkhttpGet.UseGetImage(okHttpClient, "http://192.168.0.103/BijinTemp/index.php/api/bijin/image?token=" + getImageToken(jsonArray, arrayIndex) + "&size=large", "X-BijinScience",
                             "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody);
-                    bytes.add(b);
-                    arrayIndex++;
-                }
-                Message message = new Message();
-                message.arg1 = 1;
-                myhandler.sendMessage(message);
-            }
-        }).start();
 
-        return b;
+                if(arrayIndex==0) {
+                    Message message = new Message();
+                    message.arg1 = 1;
+                    myhandler.sendMessage(message);
+                }
+        arrayIndex++;
     }
 
 }

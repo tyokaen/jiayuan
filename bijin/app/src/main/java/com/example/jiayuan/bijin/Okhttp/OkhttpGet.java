@@ -27,14 +27,18 @@ public class OkhttpGet {
     /*
     需要更新UI控件
      */
+    public static Call mcall=null;
+    static  ArrayList<Call> calls=new ArrayList<Call>();
+    static  OkHttpClient okHttpClient=new OkHttpClient();
 public  static String UseGetString(OkHttpClient okHttpClient, String url, String headerKey, String headerVal, RequestBody body, final Handler handler, final int arg){
         String result="";
     Request request = new Request.Builder().url(url)
             .header(headerKey,headerVal)
             .method("GET", body)
             .build();
-    Call call=okHttpClient.newCall(request);
-    call.enqueue(new Callback() {
+     mcall=okHttpClient.newCall(request);
+     calls.add(mcall);
+    mcall.enqueue(new Callback() {
         public void onFailure(Call call, IOException e) {
         }
         @Override
@@ -52,7 +56,7 @@ public  static String UseGetString(OkHttpClient okHttpClient, String url, String
 获取图片token的JSONArray
 
  */
-    public  static String UseGetArray(OkHttpClient okHttpClient, String url, String headerKey, String headerVal, RequestBody body) {
+    public  static String UseGetArray( OkHttpClient okHttpClient,String url, String headerKey, String headerVal, RequestBody body) {
         String result="";
         Request request = new Request.Builder().url(url)
                 .header(headerKey,headerVal)
@@ -60,7 +64,9 @@ public  static String UseGetString(OkHttpClient okHttpClient, String url, String
                 .build();
         Response response= null;
         try {
-            response = okHttpClient.newCall(request).execute();
+            mcall=okHttpClient.newCall(request);
+            calls.add(mcall);
+            response = mcall.execute();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -107,27 +113,7 @@ public  static String UseGetString(OkHttpClient okHttpClient, String url, String
         }
              return result;
     }
-    public  static String UseGetString1(OkHttpClient okHttpClient, String url, String headerKey, String headerVal, RequestBody body) {
-        String result="";
-        Request request = new Request.Builder().url(url)
-                .header(headerKey,headerVal)
-                .method("GET", body)
-                .build();
-        Response response= null;
-        try {
-            response = okHttpClient.newCall(request).execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(response.isSuccessful()) {
-            try {
-                result= response.body().string();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return result;
-    }
+
     public  static  byte[] UseGetImage(OkHttpClient okHttpClient,String url,String headerKey,String headerVal,RequestBody body){
         byte[] b=new byte[10000];
         Request request = new Request.Builder().url(url)
@@ -168,6 +154,12 @@ public  static String UseGetString(OkHttpClient okHttpClient, String url, String
             return ""+response.isSuccessful();
 
     }
-
+   public static void CancelCall(){
+     if(mcall!=null&&mcall.isExecuted())
+         mcall.cancel();
+   }
+   public static boolean isCanceled(){
+       return mcall.isCanceled();
+   }
 
 }

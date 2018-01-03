@@ -19,10 +19,19 @@
             <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+                app:theme="@style/Theme.AppCompat.Light.NoActionBar"
                 android:background="@color/colorPrimary"
-                android:id="@+id/tool"
-                />
+                android:id="@+id/tool">
+                <TextView
+                    android:id="@+id/bar_title"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:text="マイページ"
+                    />
+                </android.support.v7.widget.Toolbar>
         </LinearLayout>
     </FrameLayout>
     <android.support.design.widget.NavigationView

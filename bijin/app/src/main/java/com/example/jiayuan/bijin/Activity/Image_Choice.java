@@ -19,11 +19,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
-import com.example.jiayuan.bijin.Adapter.ImageAdapter;
 import com.example.jiayuan.bijin.Okhttp.OkhttpGet;
 import com.example.jiayuan.bijin.R;
 import com.example.jiayuan.bijin.Tools.StringToJson;
-import com.example.jiayuan.bijin.cache.UserTokenCache;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,8 +57,6 @@ public class Image_Choice extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image__choice);
-        ImageAdapter imageAdapter = new ImageAdapter(this, images);
-        imageAdapter.createReflectedImages();
         imageSwitcher = (ImageSwitcher) findViewById(R.id.Gallery1);
         IBtn_next = (ImageButton) findViewById(R.id.sample_dislake);
         IBtn_like = (ImageButton) findViewById(R.id.sample_like);
@@ -82,14 +78,22 @@ public class Image_Choice extends AppCompatActivity implements View.OnClickListe
             super.handleMessage(msg);
             if(msg.arg1==1) {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes.get(count), 0, bytes.get(count).length);
-                imageSwitcher.setImageDrawable(new BitmapDrawable(bitmap));
+                if(bitmap==null)
+                    imageSwitcher.setImageResource(R.drawable.defaultuserimage);
+                else {
+                    imageSwitcher.setImageDrawable(new BitmapDrawable(bitmap));
+                }
             }
             else if(msg.arg1==2){
                 count++;
                 if(count<10) {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes.get(count), 0, bytes.get(count).length);
                     imageSwitcher.setInAnimation(AnimationUtils.loadAnimation(getApplication(),R.anim.left_in));
-                    imageSwitcher.setImageDrawable(new BitmapDrawable(bitmap));
+                    if(bitmap==null)
+                        imageSwitcher.setImageResource(R.drawable.defaultuserimage);
+                    else {
+                        imageSwitcher.setImageDrawable(new BitmapDrawable(bitmap));
+                    }
 
                 }
                 if(count==10){
@@ -152,7 +156,6 @@ public class Image_Choice extends AppCompatActivity implements View.OnClickListe
             case R.id.sample_like:
                 //getImage(1);
                 if (index < getArrayLength(ImageToken)-1) {
-
                                     try {
                                         send_Image(index,1);
                                     } catch (JSONException e) {
@@ -181,11 +184,11 @@ public class Image_Choice extends AppCompatActivity implements View.OnClickListe
         if (i == 1)
             vote="upper";
         else vote = "lower";
-        final  RequestBody requestBody = RequestBody.create(type,"user_token="+ UserTokenCache.getInstance().getUserToken(this)+"&bijin_token="+jsonArray.getJSONObject(index).getString("token")+"&vote="+vote);
+        final  RequestBody requestBody = RequestBody.create(type,"user_token="+getIntent().getStringExtra("UserToken")+"&bijin_token="+jsonArray.getJSONObject(index).getString("token")+"&vote="+vote);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                result = OkhttpGet.UsePost(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/vote","X-BijinScience",
+                result = OkhttpGet.UsePost(okHttpClient, "http://192.168.0.103/BijinTemp/index.php/api/vote","X-BijinScience",
                         "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody);
                 if(index<10) {
                     Message message = new Message();
@@ -202,7 +205,7 @@ public class Image_Choice extends AppCompatActivity implements View.OnClickListe
             public void run() {
                 RequestBody requestBody = null;
                 while (arrayIndex < 10) {
-                    b = OkhttpGet.UseGetImage(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/bijin/image?token=" + getImageToken(jsonArray, arrayIndex) + "&size=large", "X-BijinScience",
+                    b = OkhttpGet.UseGetImage(okHttpClient, "http://192.168.0.103/BijinTemp/index.php/api/bijin/image?token=" + getImageToken(jsonArray, arrayIndex) + "&size=large", "X-BijinScience",
                             "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody);
                     bytes.add(b);
                     arrayIndex++;

@@ -170,7 +170,7 @@ class Myhandler extends Handler{
                 public void run() {
                     for (int i = firstVisibleItem; i < firstVisibleItem + visibleItemCount; i++) {
                         {
-                            UseGetImage1(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/bijin/image?token=" + bijinToken.get(i) + "&size=small", "X-BijinScience",
+                            UseGetImage1(okHttpClient, "http://192.168.0.103/BijinTemp/index.php/api/bijin/image?token=" + bijinToken.get(i) + "&size=small", "X-BijinScience",
                                     "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody, i);
                         }
 
@@ -204,13 +204,16 @@ class Myhandler extends Handler{
             }
             public void onResponse(Call call, Response response) throws IOException {
                 final byte[] b = response.body().bytes();
-                final Bitmap bitmap = ToolsBitmap.getInstance().compressBitmap(b);
+                Bitmap bitmap=null;
+                if(b.length>10000)
+                bitmap = ToolsBitmap.getInstance().getScaledBitmap(b,280);
                 if (Pre_recommend.this!= null&&bijinToken.size()>0) {
+                    final Bitmap finalBitmap = bitmap;
                     Pre_recommend.this.runOnUiThread(new Runnable() {
                         public void run() {
                             ImageView imageView = (ImageView) gridView.findViewWithTag(bijinToken.get(position));
-                            if(bitmap!=null&&imageView!=null)
-                                imageView.setImageBitmap(bitmap);
+                            if(finalBitmap !=null&&imageView!=null)
+                                imageView.setImageBitmap(finalBitmap);
                             else imageView.setImageResource(R.drawable.defaultuserimage);
                         }
                     });
@@ -227,7 +230,7 @@ class Myhandler extends Handler{
         new Thread(new Runnable() {
             @Override
             public void run() {
-                OkhttpGet.UseGetList(okHttpClient, "http://192.168.0.118/BijinScience-Web/index.php/api/recommend/setup?user_token="+ UserTokenCache.getInstance().getUserToken(Pre_recommend.this)+"&count=6", "X-BijinScience",
+                OkhttpGet.UseGetList(okHttpClient, "http://192.168.0.103/BijinScience-Web/index.php/api/recommend/setup?user_token="+ UserTokenCache.getInstance().getUserToken(Pre_recommend.this)+"&count=6", "X-BijinScience",
                         "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,bijinToken,"bijin_token_list");
                 Message message=new Message();
                 message.arg1=1;
@@ -265,7 +268,7 @@ class Myhandler extends Handler{
                 .build();
         new Thread(new Runnable() {
             public void run() {
-                result=OkhttpGet.UsePost(okHttpClient,"http://192.168.0.118/BijinScience-Web/index.php/api/tag/vote","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", formbody);
+                result=OkhttpGet.UsePost(okHttpClient,"http://192.168.0.103/BijinScience-Web/index.php/api/tag/vote","X-BijinScience","Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", formbody);
                 Message message=new Message();
                 message.arg1=4;
                 myhandler.sendMessage(message);

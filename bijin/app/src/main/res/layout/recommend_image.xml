@@ -6,7 +6,7 @@
         android:layout_height="100dp"
         android:layout_width="100dp"
         android:id="@+id/Img_recommend"
-        android:scaleType="fitXY"
+        android:scaleType="centerInside"
         />
     <ImageView
         android:layout_height="100dp"

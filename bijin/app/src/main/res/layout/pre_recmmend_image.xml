@@ -8,7 +8,7 @@
     android:layout_height="140dp"
     android:layout_width="140dp"
     android:id="@+id/Img_pre_recommend"
-    android:scaleType="fitXY"
+    android:scaleType="centerInside"
     />
 <ImageView
     android:layout_height="140dp"

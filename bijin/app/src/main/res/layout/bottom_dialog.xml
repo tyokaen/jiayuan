@@ -22,7 +22,7 @@
     />
 <TextView
     android:id="@+id/logout_cancel"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
     android:layout_width="match_parent"
     android:text="キャンセル"
     android:textSize="18sp"

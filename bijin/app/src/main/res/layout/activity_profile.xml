@@ -5,28 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.jiayuan.bijin.Fragment.bijin_best_detail">
-    <android.support.v7.widget.Toolbar
+    tools:context="com.example.jiayuan.bijin.Activity.ProfileActivity">
+<ImageView
+    android:layout_height="100dp"
+    android:layout_width="100dp"
+    android:layout_gravity="center_horizontal"
+    android:src="@drawable/defaultuserimage"
+    />
+    <View
+        android:background="#9e9e9e"
         android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_marginTop="10dp"
+        />
+    <LinearLayout
         android:layout_height="wrap_content"
-        app:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        android:background="@color/colorPrimary"
-        android:id="@+id/tool">
-        <TextView
-            android:id="@+id/bar_title"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:text="BIJINプロフィール"
-            />
-    </android.support.v7.widget.Toolbar>
-    <ImageView
-        android:id="@+id/Best_bijin_detail_show"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:scaleType="centerCrop"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:text="ユーザーID"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            />
+        <EditText
+            android:id="@+id/Ed_user_id"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_weight="1"
+            android:focusable="false"
+            android:editable="false"
+            android:background="@null"
+
+            />
+    </LinearLayout>
+    <View
+        android:background="#9e9e9e"
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_marginTop="5dp"
         />
     <LinearLayout
         android:layout_height="wrap_content"
@@ -42,20 +64,22 @@
             android:layout_width="0dip"
             android:layout_weight="1"
             />
-        <TextView
-            android:id="@+id/Tx_Best_bijin_name"
+        <EditText
+            android:id="@+id/Ed_user_name"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:layout_weight="1"
+            android:background="@null"
 
             />
     </LinearLayout>
     <View
-    android:background="#9e9e9e"
-    android:layout_width="match_parent"
-    android:layout_height="1sp"
-    />
+        android:background="#9e9e9e"
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_marginTop="5dp"
+        />
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -71,11 +95,12 @@
             android:layout_weight="1"
             />
         <TextView
-            android:id="@+id/Tx_Best_bijin_address"
+            android:id="@+id/Ed_user_local"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:layout_weight="1"
+            android:background="@null"
 
             />
     </LinearLayout>
@@ -83,36 +108,7 @@
         android:background="#9e9e9e"
         android:layout_width="match_parent"
         android:layout_height="1sp"
-        android:layout_marginTop="10dp"
-        />
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:text="職業"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:layout_width="0dip"
-            android:layout_weight="1"
-            />
-        <TextView
-            android:id="@+id/Tx_Best_bijin_job"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_weight="1"
-
-            />
-    </LinearLayout>
-    <View
-        android:background="#9e9e9e"
-        android:layout_width="match_parent"
-        android:layout_height="1sp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         />
     <LinearLayout
         android:layout_height="wrap_content"
@@ -129,18 +125,20 @@
             android:layout_weight="1"
             />
         <TextView
-            android:id="@+id/Tx_Best_bijin_birth"
+            android:id="@+id/Ed_user_birth"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:layout_weight="1"
+            android:background="@null"
+
             />
     </LinearLayout>
     <View
         android:background="#9e9e9e"
         android:layout_width="match_parent"
         android:layout_height="1sp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         />
     <LinearLayout
         android:layout_height="wrap_content"
@@ -148,7 +146,68 @@
         android:orientation="horizontal"
         >
         <TextView
-            android:text="身長"
+            android:text="性別"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/Ed_user_sex"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_weight="1"
+            android:background="@null"
+
+            />
+    </LinearLayout>
+    <View
+        android:background="#9e9e9e"
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_marginTop="5dp"
+        />
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:text="パスワード"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            />
+        <EditText
+            android:id="@+id/Ed_user_pwd"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="バースワード"
+            android:textSize="15dp"
+            />
+    </LinearLayout>
+    <View
+        android:background="#9e9e9e"
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_marginTop="5dp"
+        />
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:text="パースワード確認"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -157,29 +216,36 @@
             android:layout_weight="1"
 
             />
-        <TextView
-            android:id="@+id/Tx_Best_bijin_height"
+        <EditText
+            android:id="@+id/Ed_user_pwd1"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:textColor="@color/black"
             android:layout_weight="1"
+            android:background="@null"
+            android:hint="パースワード確認"
             />
     </LinearLayout>
     <View
         android:background="#9e9e9e"
         android:layout_width="match_parent"
         android:layout_height="1sp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         />
     <Button
-        android:id="@+id/Btn_bijin_choose"
         android:layout_height="wrap_content"
         android:layout_width="250dp"
-        android:layout_gravity="center_horizontal"
-        android:text="登録"
-        android:textColor="@color/white"
         android:background="@drawable/to_login_button"
-        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:text="保存"
+        android:layout_marginTop="20dp"
+        android:id="@+id/Btn_user_info"
         />
+    <TextView
+        android:id="@+id/text"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        />
+
 </LinearLayout>

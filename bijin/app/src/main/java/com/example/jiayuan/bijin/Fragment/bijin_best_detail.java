@@ -12,10 +12,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.jiayuan.bijin.Activity.user_main;
 import com.example.jiayuan.bijin.Okhttp.OkhttpGet;
 import com.example.jiayuan.bijin.R;
 import com.example.jiayuan.bijin.Tools.StringToJson;
-import com.example.jiayuan.bijin.Activity.user_main;
 
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
@@ -84,14 +84,14 @@ public class bijin_best_detail extends AppCompatActivity implements View.OnClick
         new Thread(new Runnable() {
             @Override
             public void run() {
-                OkhttpGet.UseGetString(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/bijin/info?token="+getIntent().getStringExtra("ImageToken"),"X-BijinScience",
+                OkhttpGet.UseGetString(okHttpClient, "http://192.168.0.103/BijinTemp/index.php/api/bijin/info?token="+getIntent().getStringExtra("ImageToken"),"X-BijinScience",
                         "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,myHandler,1);
                 getImage(requestBody,myHandler);
             }
         }).start();
     }
     public void getImage(RequestBody requestBody,Handler handler){
-        b = OkhttpGet.UseGetImage(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/bijin/image?token=" + getIntent().getStringExtra("ImageToken") + "&size=large", "X-BijinScience",
+        b = OkhttpGet.UseGetImage(okHttpClient, "http://192.168.0.103/BijinTemp/index.php/api/bijin/image?token=" + getIntent().getStringExtra("ImageToken") + "&size=large", "X-BijinScience",
                 "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody);
         Message message=new Message();
         message.arg1=2;

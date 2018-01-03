@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jiayuan.bijin.Okhttp.OkhttpGet;
+import com.example.jiayuan.bijin.Presenter.ImageAction;
+import com.example.jiayuan.bijin.Presenter.TotalInfoAction;
+import com.example.jiayuan.bijin.Presenter.UserInfoAction;
 import com.example.jiayuan.bijin.R;
 import com.example.jiayuan.bijin.Tools.StringToJson;
-import com.example.jiayuan.bijin.Tools.ToolsBitmap;
 import com.example.jiayuan.bijin.cache.UserTokenCache;
 import com.example.jiayuan.bijin.diy_view.AgeRankingView;
 import com.example.jiayuan.bijin.diy_view.MaleRankingView;
@@ -28,7 +31,6 @@ import com.example.jiayuan.bijin.diy_view.WorldRankingView;
 
 import org.json.JSONArray;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -37,21 +39,22 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 
 /**
  * Created by jiayuan on 2017/08/20.
  */
 
 public class MyPageFragment extends Fragment implements View.OnClickListener {
+    UserInfoAction userInfoAction=new UserInfoAction();
+    TotalInfoAction totalInfoAction=new TotalInfoAction();
+    ImageAction imageAction=new ImageAction();
     byte[] b=new byte[10000];
     ArrayList<String> ImageData=new ArrayList<String>();
     int tokenCount=0,imageCount=0;
     View myPageView;
+    TextView test=null;
     RoundProgressbar progressbar=null;
     MyPageView Myview1,Myview2,Myview3;
     AgeRankingView ten_view,twnety_view,thirty_view,forty_view,fifity_view;
@@ -70,7 +73,6 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
     MyHandler myHandler=new MyHandler();
     String ImageToken=null;
     ArrayList<Future> futureArrayList=new ArrayList<Future>();
-    ArrayList<String> ImageTokenArray=new ArrayList<String>();
     ExecutorService executorService= Executors.newCachedThreadPool();
     JSONArray jsonArray=new JSONArray();
     ArrayList<String> bijinToken=new ArrayList<String>();
@@ -96,8 +98,14 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
             if(msg.arg1==2){
                 Tx_user_name.setText(StringToJson.JsonToString((String)msg.obj,"nickname"));
                 Tx_user_birth.setText("生年月日" +StringToJson.JsonToString((String)msg.obj,"date_of_birth"));
+                    String userId=StringToJson.JsonToString((String)msg.obj,"screen_name");
+                    String nickname = StringToJson.JsonToString((String) msg.obj, "nickname");
+                    String birth = StringToJson.JsonToString((String) msg.obj, "date_of_birth");
+                    String local = StringToJson.JsonToString((String) msg.obj, "location");
+                    String sex = StringToJson.JsonToString((String) msg.obj, "gender");
+                    UserTokenCache.getInstance().storeUserInfo(getActivity(),userId,nickname,local,birth,sex);
+
                 Tx_Sample.setText(StringToJson.JsonToString((String)msg.obj,"sorting")+"回");
-                Tx_syncro.setText(StringToJson.JsonToString((String)msg.obj,"synchro")+"%");
                 if(StringToJson.JsonToString((String)msg.obj,"is_best3_configured").equals("true"))
                 Tx_best3.setText("ベスト3設定完了しました");
                 else
@@ -110,7 +118,6 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
                 world_man_view.setWorldTitle(ChangToPer(total,totalMale)+"%");
                 world_woman_view.setWorldTitle(String.valueOf(100-Integer.parseInt(ChangToPer(total,totalMale)))+"%");
                 progressbar.setProgress(Integer.parseInt(ChangToPer(total,totalMale)));
-                //dialog.cancel();
            }
         }
     }
@@ -129,6 +136,7 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
         Tx_user_birth=(TextView) myPageView.findViewById(R.id.user_birth);
         Tx_Total_Num=(TextView)myPageView.findViewById(R.id.user_total);
         Tx_syncro=(TextView)Myview2.findViewById(R.id.sample_number_text);
+        test=(TextView)myPageView.findViewById(R.id.text);
        // textView1=(TextView)myPageView.findViewById(R.id.testResult2);
         anim= AnimationUtils.loadAnimation(getContext(), R.anim.loading_dialog);
        initAgeRanking();
@@ -136,8 +144,6 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
         initWorldRanking();
         initImageView();
         setAni(imageViewArrayList);
-        getRankingImageArray();
-        getAllInfo();
         return myPageView;
     }
     public void initAgeRanking(){
@@ -165,6 +171,12 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
         world_woman_view=(WorldRankingView)myPageView.findViewById(R.id.world_woman);
         world_man_view.setWorldImage(R.drawable.man);
         world_woman_view.setWorldImage(R.drawable.woman);
+    }
+    public void onResume(){
+        super.onResume();
+        getAllInfo();
+
+
     }
     public void initImageView(){
         imageView1=(ImageView)ten_view.findViewById(R.id.age_rangking1);
@@ -278,13 +290,13 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public Object call() throws Exception {
                     if (finalI == 60) {
-                        ImageToken = OkhttpGet.UseGetArray(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/general/trend?gender=man&count=" + 3, "X-BijinScience",
+                        ImageToken = OkhttpGet.UseGetArray(okHttpClient,"http://192.168.0.103/BijinTemp/index.php/api/general/trend?gender=man&count=" + 3, "X-BijinScience",
                                 "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", body);
                     } else if (finalI == 70) {
-                        ImageToken = OkhttpGet.UseGetArray(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/general/trend?gender=woman&count=" + 3, "X-BijinScience",
+                        ImageToken = OkhttpGet.UseGetArray(okHttpClient,"http://192.168.0.103/BijinTemp/index.php/api/general/trend?gender=woman&count=" + 3, "X-BijinScience",
                                 "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", body);
                     } else {
-                        ImageToken = OkhttpGet.UseGetArray(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/general/trend?generation=" + finalI + "&count=" + 5, "X-BijinScience",
+                        ImageToken = OkhttpGet.UseGetArray(okHttpClient,"http://192.168.0.103/BijinTemp/index.php/api/general/trend?generation=" + finalI + "&count=" + 5, "X-BijinScience",
                                 "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", body);
                     }
                     return ImageToken;
@@ -303,8 +315,6 @@ public String  ChangToPer(String Total,String maleNum){
     resultStr=String.valueOf(resultDouble).substring(2,4);
     return resultStr;
 
-
-
 }
 
    /*
@@ -312,18 +322,18 @@ public String  ChangToPer(String Total,String maleNum){
   获取图片token
     */
     public void getToken(ArrayList<Future> list){
-        for(int i=0;i<list.size();i++){
+        if(list.size()==7){
+        for(int i=0;i<list.size();i++) {
             try {
-                jsonArray= StringToJson.getJSonArray(jsonArray,(String) list.get(i).get(),"popular_bijin");
-
+                jsonArray = StringToJson.getJSonArray(jsonArray, (String) list.get(i).get(), "popular_bijin");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
-            StringToJson.getImageToken(bijinToken,jsonArray,"bijin_token");
+            StringToJson.getImageToken(bijinToken, jsonArray, "bijin_token");
         }
-
+        }
     }
     /*
 
@@ -335,79 +345,38 @@ public void getAllInfo(){
     new Thread(new Runnable() {
         @Override
         public void run() {
-            getUserInfo();
-            getTotal();
+            getRankingImageArray();
+            userInfoAction.getUserInfo(getContext(),myHandler);
+            totalInfoAction.getTotal(myHandler);
             getImage();
-
         }
     }).start();
-
 }
-/*
-获取图片
- */
-    public void getImage(){
+    public void getImage() {
         getToken(futureArrayList);
-        while (tokenCount < 31) {
-            RequestBody requestBody = null;
-            UseGetImage1(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/bijin/image?token=" + bijinToken.get(tokenCount) + "&size=small", "X-BijinScience",
-                    "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,imageViewArrayList.get(tokenCount));
-            tokenCount++;
+        if (futureArrayList.size() == 7) {
+            while (tokenCount < 31) {
+               imageAction.getImage(bijinToken.get(tokenCount),getActivity(),imageViewArrayList.get(tokenCount));
+                tokenCount++;
+            }
         }
-    }
-/*
-获取用户信息
- */
-
-    public void getUserInfo(){
-        RequestBody requestBody = null;
-       OkhttpGet.UseGetString(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/user?token="+ UserTokenCache.getInstance().getUserToken(getContext()), "X-BijinScience",
-                "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,myHandler,2);
-    }
-
-    /*
-    获取用户数量
-     */
-    public void getTotal(){
-        RequestBody requestBody = null;
-       OkhttpGet.UseGetString(okHttpClient, "http://192.168.0.118/BijinTemp/index.php/api/general/subject", "X-BijinScience", "Bearer Mn6t5Dhfqz6hf4LtKToS19igKgeHDff0sCJNqQT6pzEvT0EEtT7L2FSnMWUzbaQuC9hSzbzF0eau4FYN859bl1pXxkxzknJNMRGmSgRtkSDF7C3gicht3wqQ7DqHRZ4EQkQJqIc1AGghs9n0CvKfIbWpEmW6l1kcCaLTJOut411NbFoDaYIJZFYERVldwvgZwSSfGnzl", requestBody,myHandler,3);
     }
     public void createDialog(){
         dialog= ProgressDialog.show(getActivity(),"提示","正在获取");
     }
-    /*
-    异步加载图片
-     */
-    public void  UseGetImage1(final OkHttpClient okHttpClient, String url, String headerKey, String headerVal, RequestBody body, final ImageView imageView){
-        Request request = new Request.Builder().url(url)
-                .header(headerKey,headerVal)
-                .method("GET", body)
-                .build();
-        call=getCall(request);
-        call.enqueue(new Callback() {
-            public void onFailure(Call call, IOException e) {
-            }
-            public void onResponse(final Call call, Response response) throws IOException {
-                final byte[] b = response.body().bytes();
-                final Bitmap bitmap = ToolsBitmap.getInstance().getScaledBitmap(b);
-                if (MyPageFragment.this.getActivity() != null) {
-                    MyPageFragment.this.getActivity().runOnUiThread(new Runnable() {
-                        public void run() {
-                            imageView.setImageBitmap(bitmap);
-                            imageView.clearAnimation();
-                        }
-                    });
-                }
-            }
-        });
-    }
-    public Call getCall(Request request){
-        return okHttpClient.newCall(request);
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-        call.cancel();
+        OkhttpGet.CancelCall();
+        if(call!=null&&call.isExecuted())
+            call.cancel();
+        futureArrayList.clear();
+        bijinToken.clear();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d("sdddddddddddddddddd","ondetach");
     }
 }

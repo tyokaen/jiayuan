@@ -66,12 +66,6 @@
             android:src="@drawable/defaultuserimage"
             android:scaleType="fitXY"
             />
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="第一位"
-            android:layout_gravity="center_horizontal"
-            />
      </LinearLayout>
         <LinearLayout
             android:layout_height="wrap_content"
@@ -93,12 +87,6 @@
                 android:src="@drawable/defaultuserimage"
                 android:scaleType="fitXY"
                 />
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="第二位"
-                android:layout_gravity="center_horizontal"
-                />
         </LinearLayout>
         <LinearLayout
             android:layout_height="wrap_content"
@@ -119,12 +107,6 @@
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/defaultuserimage"
                 android:scaleType="fitXY"
-                />
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="第三位"
-                android:layout_gravity="center_horizontal"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -148,12 +130,6 @@
                 android:src="@drawable/defaultuserimage"
                 android:scaleType="fitXY"
                 />
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="第四位"
-                android:layout_gravity="center_horizontal"
-                />
         </LinearLayout>
         <LinearLayout
             android:layout_height="wrap_content"
@@ -169,12 +145,7 @@
                 android:src="@drawable/defaultuserimage"
                 android:scaleType="fitXY"
                 />
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="第五位"
-                android:layout_gravity="center_horizontal"
-                />
+
         </LinearLayout>
         <LinearLayout
             android:layout_height="wrap_content"
@@ -190,18 +161,14 @@
                 android:src="@drawable/defaultuserimage"
                 android:scaleType="fitXY"
                 />
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="第六位"
-                android:layout_gravity="center_horizontal"
-                />
+
         </LinearLayout>
      </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="20dp"
         >
         <LinearLayout
             android:layout_height="wrap_content"
@@ -217,12 +184,6 @@
                 android:src="@drawable/defaultuserimage"
                 android:scaleType="fitXY"
                 />
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="第七位"
-                android:layout_gravity="center_horizontal"
-                />
         </LinearLayout>
         <LinearLayout
             android:layout_height="wrap_content"
@@ -230,20 +191,15 @@
             android:orientation="vertical"
             android:layout_weight="1"
             >
+
             <ImageView
                 android:id="@+id/Img_rank_eight"
-                android:layout_height="100dp"
                 android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/defaultuserimage"
                 android:scaleType="fitXY"
-                />
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="第八位"
-                android:layout_gravity="center_horizontal"
-                />
+                android:src="@drawable/defaultuserimage" />
+
         </LinearLayout>
         <LinearLayout
             android:layout_height="wrap_content"
@@ -251,20 +207,14 @@
             android:orientation="vertical"
             android:layout_weight="1"
             >
+
             <ImageView
                 android:id="@+id/Img_rank_nine"
-                android:layout_height="100dp"
                 android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/defaultuserimage"
                 android:scaleType="fitXY"
-                />
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="第九位"
-                android:layout_gravity="center_horizontal"
-                />
+                android:src="@drawable/defaultuserimage" />
         </LinearLayout>
     </LinearLayout>
     <Button
@@ -272,6 +222,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="検索"
+        android:layout_marginTop="20dp"
         android:textSize="20sp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/to_login_button"
